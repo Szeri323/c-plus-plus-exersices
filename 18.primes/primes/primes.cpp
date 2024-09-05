@@ -41,9 +41,16 @@ int main() {
 	cin >> max;
 	vector<int> myPrimes = simplePrimes(max);
 	vector<int> primes = eratostenesPrimes(max);
-	for (int x: myPrimes)
+	// n primes form vector
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; ++i) {
+		cout << myPrimes[i] << " ";
+	}
+	// all primes for range form 2 to max
+	/*for (int x: myPrimes)
 		cout << x << " ";
 	cout << endl;
 	for (int x: primes)
-		cout << x << " ";
+		cout << x << " ";*/
 }
