@@ -1,1 +1,1 @@
-# repos
+# This repository contains all my exercises from the book "Programming Principles and Practice Using C++" by Bjarne Stroustrup, aimed at grounding and improving my programming skills.
