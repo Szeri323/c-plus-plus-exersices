@@ -17,10 +17,13 @@ int f(int x, int y, int z)
 {
     int area1 = area(x, y);
     if (area1 <= 0) error("Area isn't positive.");
+    cout << area1 << endl;
     int area2 = framed_area(1, z);
     if (area2 <= 0) error("Framed area isn't positive.");
+    cout << area2 << endl;
     int area3 = framed_area(y, z);
     if (area3 <= 0) error("Framed area isn't positive.");
+    cout << area3 << endl;
     return double(area1 / area3);
 }
 
