@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tempsToFix.cpp">
+    <ClCompile Include="tempsConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
