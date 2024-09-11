@@ -2,13 +2,32 @@
 
 double ctok(double c)     // convet celcius to kelvins
 {
+    if (c < -273.15) error("Invalid data - Temperature below absolute zero.");
     int k = c + 273.15;
     return k;
 }
+double ktoc(double k)     // convet celcius to kelvins
+{
+    if (k < 0) error("Invalid data - Temperature below absolute zero.");
+    int c = k - 273.15;
+    return c;
+}
 int main()
 {
-    double c = 0;         // variable for input data
-    cin >> c;             // taking temperature to input variable
-    double k = ctok(c); // temperature conversion
-    cout << k << endl;   // printing temperature
+    char unit = 'c';
+    double degrees = 0;       // variable for input data
+    double result;
+    cout << "Pass degrees and units: " << endl;
+    cin >> degrees >> unit;             // taking temperature to input variable
+    if (unit == 'c') {
+        result = ctok(degrees); // kelvins to celcius conversion
+    }
+    else if (unit == 'k') {
+        result = ktoc(degrees);
+    }
+    else {
+        cout << "Not supported unit.";
+        return -1;
+    }
+    cout << result << endl;   // printing temperature
 }

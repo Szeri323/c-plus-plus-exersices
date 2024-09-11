@@ -29,7 +29,7 @@ int main() {
 	cout << "\n\n--- Chapter 4 - Performing calculations ---\n\n";
 
 	cout << "abstraction - \n";
-	cout << "begin() - \n";
+	cout << "begin() - It is a vector class methos, that returns the first index of vector.\n";
 	cout << "input data - \n";
 	cout << "output data - \n";
 	cout << "definition - \n";
