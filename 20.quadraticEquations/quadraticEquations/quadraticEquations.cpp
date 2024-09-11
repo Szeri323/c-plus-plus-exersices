@@ -11,8 +11,10 @@ int main() {
 	double delta = calculateDelta(a, b, c);
 	cout << "Delta equals: " << delta << endl;
 	if (delta > 0) {
-		cout << "x1: " << (-b - sqrt(delta) / 2 * a) << endl;
-		cout << "x2: " << (-b + sqrt(delta) / 2 * a) << endl;
+		cout << delta << endl;
+		cout << sqrt(delta) << endl;
+		cout << "x1: " << (-b - sqrt(delta)) / 2 * a << endl;
+		cout << "x2: " << (-b + sqrt(delta)) / 2 * a << endl;
 	}
 	else if (delta == 0) {
 		cout << "x: " << (-b / 2 * a) << endl;
