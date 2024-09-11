@@ -26,7 +26,7 @@ int main() {
 	cout << "program - Is set of instructions what computer has to do and how it can do it.\n";
 	cout << "executible - last stage of production. It is finished, compiled and linked file, that we can run on our computer.\n";
 	
-	cout << "\n\n--- Chapter 4 - performing calculations ---\n\n";
+	cout << "\n\n--- Chapter 4 - Performing calculations ---\n\n";
 
 	cout << "abstraction - \n";
 	cout << "begin() - \n";
@@ -59,14 +59,26 @@ int main() {
 	cout << "expression - \n";
 	cout << "range for instruction - \n";
 
-	cout << "\n\n--- Chapter 4 - performing calculations ---\n\n";
+	cout << "\n\n--- Chapter 5 - Errors ---\n\n";
 
-	cout << "abstraction - \n";
-	cout << "abstraction - \n";
-	cout << "abstraction - \n";
-	cout << "abstraction - \n";
-	cout << "abstraction - \n";
-	cout << "abstraction - \n";
+	cout << "assertion - \n";
+	cout << "error - \n";
+	cout << "runtime error - \n";
+	cout << "compilation error - \n";
+	cout << "consolidation error - \n";
+	cout << "sytax error - \n";
+	cout << "type error - \n";
+	cout << "range error - \n";
+	cout << "argument error - \n";
+	cout << "catch - \n";
+	cout << "debug - \n";
+	cout << "invariant - \n";
+	cout << "testing - \n";
+	cout << "throw - \n";
+	cout << "pre-condition - \n";
+	cout << "post-condition - \n";
+	cout << "exception - \n";
+	cout << "requirement - \n";
 
 	return 0;
 }
