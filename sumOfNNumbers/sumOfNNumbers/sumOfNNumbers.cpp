@@ -1,8 +1,11 @@
 #include "../../../headers/std_lib_facilities.h"
 
+
+
 int main() {
-	vector<int> numbers;
-	int number;
+	vector<double> numbers;
+	vector<double> differences;
+	double number;
 	int n;
 	int sum = 0;
 	cout << "How many number do you want to sum: " << endl;
@@ -25,5 +28,10 @@ int main() {
 		}
 		cout << sum << endl;
 	}
-
+	for (int i = 1; i < numbers.size(); ++i) {
+		differences.push_back(numbers[i - 1] - numbers[i]);
+	}
+	for (double x : differences) {
+		cout << x << " ";
+	}
 }
