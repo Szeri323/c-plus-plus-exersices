@@ -13,10 +13,18 @@ double ktoc(double k)     // convet celcius to kelvins
     return c;
 }
 double ctof(double degrees) {
-    return 9.0 / 5 * degrees + 32;
+    double result = 9.0 / 5 * degrees + 32;
+    cout << result << endl;
+    cout << result - int(result) << endl;
+    if (result - int(result) != 0) error("Result is not int.");
+    return result;
 }
 double ftoc(double degrees) {
-    return (degrees - 32) * 5/9;
+    double result = (degrees - 32) * 5/9;
+    cout << result << endl;
+    cout << result - int(result) << endl;
+    if (result - int(result) != 0) error("Result is not int.");
+    return result;
 }
 int main()
 {
@@ -32,6 +40,10 @@ int main()
         }
         else if (desired_unit == 'f') {
             result = ctof(degrees); 
+        }
+        else {
+            cout << "Not implemented unit." << endl;
+            return 0;
         }
     }
     else if (unit == 'k') {
