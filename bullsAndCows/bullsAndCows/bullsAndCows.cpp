@@ -28,21 +28,16 @@ int char_to_digit(int c) {
 }
 
 vector<int> populte_vector() {
-	vector<int> digits{ 0,1,2,3,4,5,6,7,8,9 };
 	vector<int> solution;
 	while (solution.size() != 4) {
-		/*cout << solution.size();*/
 		int random = randint(9);
 		bool flag = false;
 		if (solution.size() == 0) {
 			solution.push_back(random);
 		}
 		for (int j = 0; j < solution.size(); ++j) {
-			cout << random << " " << solution[j] << endl;
 			if (random == solution[j]) 
 				flag = true;
-			
-
 		}
 		if (flag == false)
 			solution.push_back(random);
@@ -59,20 +54,18 @@ vector<int> create_vector_from_string(string choice) {
 
 bool compare_vectors(vector<int> solution, vector<int> choice_numbers) {
 	int bulls = 0;
-	int cows;
+	int cows = 0;
 	for (int i = 0; i < solution.size(); ++i) {
 		if (solution[i] == choice_numbers[i]) {
-			cout << "bull" << endl;
 			bulls += 1;
 		}
 		else {
-			/*temp = choice_numbers[i];*/
 			for (int j = 0; j < solution.size(); ++j) {
 				if (j == i) {
 					continue;
 				}
 				if (choice_numbers[i] == solution[j]) {
-					cout << "cow" << endl;
+					cows += 1;
 				}
 			}
 		}
@@ -80,6 +73,7 @@ bool compare_vectors(vector<int> solution, vector<int> choice_numbers) {
 			return true;
 		}
 	}
+	cout << "Bulls: " << bulls << " " << "Cows: " << cows << endl;
 }
 
 int main() {
@@ -98,12 +92,6 @@ int main() {
 				cin >> choice;
 				if (choice.size() < 4 || choice.size() > 4) error("Incorrect number of numbers. Pass 4.");
 				vector<int> choice_numbers = create_vector_from_string(choice);
-				for (int x : solution)
-					cout << x << " ";
-				cout << endl;
-				for (int x : choice_numbers)
-					cout << x << " ";
-				cout << endl;
 				++counter;
 				if (compare_vectors(solution, choice_numbers) == true) {
 					if (counter == 1) {
