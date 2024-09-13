@@ -30,8 +30,22 @@ int char_to_digit(int c) {
 vector<int> populte_vector() {
 	vector<int> digits{ 0,1,2,3,4,5,6,7,8,9 };
 	vector<int> solution;
-	for (int i = 0; i < 4; ++i) {
-		solution.push_back(i);
+	while (solution.size() != 4) {
+		/*cout << solution.size();*/
+		int random = randint(9);
+		bool flag = false;
+		if (solution.size() == 0) {
+			solution.push_back(random);
+		}
+		for (int j = 0; j < solution.size(); ++j) {
+			cout << random << " " << solution[j] << endl;
+			if (random == solution[j]) 
+				flag = true;
+			
+
+		}
+		if (flag == false)
+			solution.push_back(random);
 	}
 	return solution;
 }
@@ -69,27 +83,48 @@ bool compare_vectors(vector<int> solution, vector<int> choice_numbers) {
 }
 
 int main() {
-	vector<int> solution = populte_vector();
-	string choice;
 	while (true) {
-		try {
-			cout << "Write 4 numbers from 0 to 9: " << endl;
-			cin >> choice;
-			if (choice.size() < 4 || choice.size() > 4) error("Incorrect number of numbers. Pass 4.");
+		int n = 0;
+		cout << "Pass randomly choosen number: " << endl;
+		cin >> n;
+		seed_randint(n);
+		vector<int> solution = populte_vector();
+		string choice;
+		int counter = 0;
+		bool again = false;
+		while (true) {
+			try {
+				cout << "Write 4 numbers from 0 to 9: " << endl;
+				cin >> choice;
+				if (choice.size() < 4 || choice.size() > 4) error("Incorrect number of numbers. Pass 4.");
 				vector<int> choice_numbers = create_vector_from_string(choice);
-			for (int x : solution)
-				cout << x << " ";
-			cout << endl;
-			for (int x : choice_numbers)
-				cout << x << " ";
-			cout << endl;
-			if (compare_vectors(solution, choice_numbers) == true) {
-				cout << "You win." << endl;
-				break;
+				for (int x : solution)
+					cout << x << " ";
+				cout << endl;
+				for (int x : choice_numbers)
+					cout << x << " ";
+				cout << endl;
+				++counter;
+				if (compare_vectors(solution, choice_numbers) == true) {
+					if (counter == 1) {
+						cout << "You win in " << counter << " attempt." << endl;
+					}
+					else {
+						cout << "You win in " << counter << " attempts." << endl;
+					}
+					cout << "Do you want play again?" << endl;
+					cin >> again;
+					break;
+
+				}
+			}
+			catch (exception& e) {
+				cout << e.what() << endl;
 			}
 		}
-		catch (exception& e) {
-			cout << e.what() << endl;
+		if (again == false) {
+			cout << "Thanks for play, see you next time." << endl;
+			break;
 		}
 	}
 }
