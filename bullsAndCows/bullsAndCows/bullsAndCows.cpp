@@ -1,26 +1,26 @@
 #include "../../../headers/std_lib_facilities.h"
 
-int char_to_digit(int c) {
+int char_to_digit(char c) {
 	switch (c) {
-	case 48:
+	case '0':
 		return 0;
-	case 49:
+	case '1':
 		return 1;
-	case 50:
+	case '2':
 		return 2;
-	case 51:
+	case '3':
 		return 3;
-	case 52:
+	case '4':
 		return 4;
-	case 53:
+	case '5':
 		return 5;
-	case 54:
+	case '6':
 		return 6;
-	case 55:
+	case '7':
 		return 7;
-	case 56:
+	case '8':
 		return 8;
-	case 57:
+	case '9':
 		return 9;
 	default:
 		error("Input is not a digit.");
@@ -47,7 +47,7 @@ vector<int> populte_vector() {
 vector<int> create_vector_from_string(string choice) {
 	vector<int> choice_numbers;
 	for (int i = 0; i < choice.size(); ++i) {
-		choice_numbers.push_back(char_to_digit(int{ choice[i] }));
+		choice_numbers.push_back(char_to_digit(choice[i]));
 	}
 	return choice_numbers;
 }
