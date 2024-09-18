@@ -1,5 +1,8 @@
 #include "../../../headers/std_lib_facilities.h"
 
+// Implement rules of sentence. First letter big in first words, space after dot or colon, big word after dot (and space).
+
+
 class Token {
 public:
 	string word;
@@ -32,7 +35,7 @@ Token Token_stream::get() {
 
 	string word;
 	cin >> word;
-	if (word == "the" || word == "birds" || word == "fish" || word == "c++" ||
+	if (word == "." || word == "the" || word == "The" || word == "birds" || word == "fish" || word == "c++" ||
 		word == "rules" || word == "fly" || word == "swim" ||
 		word == "and" || word == "or" || word == "but" || word == "/") {
 		return Token(word);
@@ -58,15 +61,13 @@ int main() {
 	string sen = "";
 	while (cin) {
 		try {
-			Token t = ts.get();
-
-			ts.putback(t);
-
 			sen = sentence();
-			cout << "sentence: " << sen << endl;
+			cout << "Good." << endl;
+			//cout << "sentence: " << sen << endl;
 		}
 		catch (exception& e) {
-			cout << e.what() << endl;
+			cout << "Bad." << endl;
+			//cout << e.what() << endl;
 		}
 	}
 	//val = sentence()
@@ -83,7 +84,7 @@ string sentence() {
 		sen += " " + t.word + " " + sentence();
 		return sen;
 	}
-	else if (t.word == "/") {
+	else if (t.word == ".") {
 		return sen;
 	}
 	else {
@@ -115,7 +116,7 @@ string noun() {
 string article() {
 	Token t = ts.get();
 
-	if (t.word == "the") {
+	if (t.word == "the" || t.word == "The") {
 		return t.word;
 	}
 	else {
