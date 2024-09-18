@@ -32,7 +32,7 @@ Token Token_stream::get() {
 
 	string word;
 	cin >> word;
-	if (word == "birds" || word == "fish" || word == "c++" ||
+	if (word == "the" || word == "birds" || word == "fish" || word == "c++" ||
 		word == "rules" || word == "fly" || word == "swim" ||
 		word == "and" || word == "or" || word == "but" || word == "/") {
 		return Token(word);
@@ -48,9 +48,11 @@ string sentence();
 
 //string conjunction();
 
+string verb();
+
 string noun();
 
-string verb();
+string article();
 
 int main() {
 	string sen = "";
@@ -72,7 +74,8 @@ int main() {
 
 string sentence() {
 	string sen = "";
-	sen += noun();
+	sen += article();
+	sen += " " + noun();
 	sen += " " + verb();
 	Token t = ts.get();
 
@@ -106,5 +109,16 @@ string noun() {
 	}
 	else {
 		error("The word is not noun.");
+	}
+}
+
+string article() {
+	Token t = ts.get();
+
+	if (t.word == "the") {
+		return t.word;
+	}
+	else {
+		error("The word is not article.");
 	}
 }
