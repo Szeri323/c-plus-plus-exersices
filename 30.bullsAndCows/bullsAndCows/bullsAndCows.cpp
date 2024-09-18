@@ -3,7 +3,7 @@
 // Bull and Cows numbers
 
 int char_to_digit(char c) {
-	switch (c) {
+	/*switch (c) {
 	case '0':
 		return 0;
 	case '1':
@@ -26,7 +26,8 @@ int char_to_digit(char c) {
 		return 9;
 	default:
 		error("Input is not a digit.");
-	}
+	}*/
+	return c - '0';
 }
 
 vector<int> populte_vector() {
