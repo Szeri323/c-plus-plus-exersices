@@ -21,6 +21,7 @@ int factorial(int factor) {
 
 int permutation(int a, int b) {
 	if (a < 0 || b < 0) error("Numbers can't be negative.");
+	if (a > 12 || b > 12) error("To big numbers.");
 	return (factorial(a) / factorial(a - b));
 }
 
