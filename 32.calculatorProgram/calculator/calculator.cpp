@@ -1,5 +1,10 @@
-
 #include "../../../headers/std_lib_facilities.h"
+
+const char number = '8';
+const char quit = 'x';
+const char print = '=';
+const string prompt = "> ";
+const string result = "= ";
 
 class Token {
 public:
@@ -29,19 +34,20 @@ void Token_stream::putback(Token t) {
     full = true;
 }
 Token Token_stream::get() {
-    if (full) {
+    // Reads chars from input stream and creates tokens
+    if (full) { // checks if token is ready
         full = false;
         return buffer;
     }
 
     char ch;
-    cin >> ch;
+    cin >> ch; // Atention: >> skips whitespaces (spaces, new lines, tabulators etc.)
     switch (ch)
     {
     case '=':
     case 'x':
-    case '!':
-    case '(': case ')': case '{': case '}': case  '+': case '-': case '*': case '/': case '%':
+    case '!': case '(': case ')': case '{': case '}':
+    case  '+': case '-': case '*': case '/': case '%':
         return Token(ch);
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -50,7 +56,7 @@ Token Token_stream::get() {
         cin.putback(ch);
         double val;
         cin >> val;
-        return Token('8', val);
+        return Token(number, val);
     }
     default:
         error("Invalid token.");
@@ -76,37 +82,45 @@ double term();
 
 double primary();
 
-int main()
-try {
+void print_instruction() {
     cout << "Welcome in our simple calculator."
         << endl
-        << "In expresions use double type numbers." 
+        << "In expresions use double type numbers."
         << endl
         << "You can use +, -, *, / operators."
         << endl
         << "To print result use = and to close program use 'x' key."
         << endl;
-    double val = 0;
+    return;
+}
+
+void calculate() {
     while (cin) {
+        cout << prompt;
         Token t = ts.get();
 
-        if (t.kind == 'x') break;
-        if (t.kind == '=')
-            cout << '=' << val << '\n';
-        else
-            ts.putback(t);
-        val = expression();
+        while (t.kind == print) t = ts.get();
+        if (t.kind == quit) return;
+        ts.putback(t);
+        cout << result << expression() << endl;
     }
+}
+
+int main()
+try {
+    print_instruction();
+    calculate();
     keep_window_open();
+    return 0;
 }
 catch (exception& e) {
     cerr << e.what() << endl;
-    keep_window_open();
+    keep_window_open("~~");
     return 1;
 }
 catch (...) {
     cerr << "Exception \n";
-    keep_window_open();
+    keep_window_open("~~");
     return 2;
 }
 
@@ -139,6 +153,20 @@ double term()
 
     while (true) {
         switch (t.kind) {
+        case '%':
+        {
+            double d = primary();
+            if (d == 0) error("Dividing by 0.");
+            left = fmod(left, d);
+            t = ts.get();
+            break;
+            /*int i1 = narrow_cast<int>(left);
+            int i2 = narrow_cast<int>(term());
+            if (i2 == 0) error(" % : dividing by zero.");
+            left = i1 % i2;
+            t = ts.get();
+            break;*/
+        }
         case '!':
         {
             left = factorial(left);
@@ -166,7 +194,6 @@ double term()
 
 double primary() 
 {
-
     Token t = ts.get();
     switch (t.kind) {
     case '{':
@@ -183,7 +210,7 @@ double primary()
         if (t.kind != ')') error("')' was expected.");
         return d;
     }
-    case '8':
+    case number:
     {
         double d = t.value;
         t = ts.get();
@@ -195,6 +222,10 @@ double primary()
         }
         return d;
     }
+    case '-':
+        return -primary();
+    case '+':
+        return primary();
     default:
         error("Primary was expected.");
     }
