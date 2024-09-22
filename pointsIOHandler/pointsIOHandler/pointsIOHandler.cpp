@@ -2,13 +2,11 @@
 
 class Point {
 public:
-	Point(int x, int y);
+	Point();
 	friend bool operator==(Point p1, Point p2);
 	friend ifstream& operator>>(ifstream& ist, Point& p);
-	void set_x(int x) {
+	void set(int x, int y) {
 		this->x = x;
-	}
-	void set_y(int y) {
 		this->y = y;
 	}
 	int get_x() {
@@ -22,7 +20,7 @@ private:
 	int y;
 };
 
-Point::Point(int x, int y) : x(x), y(y) {}
+Point::Point() : x(0), y(0) {}
 
 bool operator==(Point p1, Point p2) {
 	return (p1.get_x() == p2.get_x() || p1.get_y() == p2.get_y());
@@ -37,8 +35,7 @@ ifstream& operator>>(ifstream& ist, Point& p) {
 		ist.clear(ios_base::failbit);
 		return ist;
 	}
-	p.set_x(x);
-	p.set_y(y);
+	p.set(x, y);
 	return ist;
 }
 
@@ -49,7 +46,7 @@ vector<Point> reading_from_file() {
 	ifstream ist{ iname }; // ist is input stream for the file named in iname
 	if (!ist) error("Could not open input file ", iname);
 	vector<Point> points;
-	for (Point p(0, 0); ist >> p;) {
+	for (Point p; ist >> p;) {
 		points.push_back(p);
 	}
 	ist.close();
@@ -72,7 +69,8 @@ vector<Point> create_vector_from_user_points() {
 	vector<Point> original_points;
 	int x, y;
 	while (cin >> x >> y) {
-		Point p(x, y);
+		Point p;
+		p.set(x, y);
 		original_points.push_back(p);
 	}
 	return original_points;
