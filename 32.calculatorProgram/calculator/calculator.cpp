@@ -1,4 +1,63 @@
+/*
+Simple calculator
+This is exercice from "Programowanie. Teoria i praktyka z wykorzystaniem C++." book.
+
+Made by: Szeri september 2024
+
+This program implements fundamental expresions for calculator.
+Data is taken by input stream cin and passed to output stream cout.
+
+Input data grammar:
+
+Statement:
+    Expression
+    Print
+    Quit
+
+Print:
+    =
+
+Quit:
+    x
+
+Expression:
+    Term
+    Expression + Term
+    Expression - Term
+
+Term:
+    Primary
+    Term * Primary
+    Term / Primary
+    Term % Primary
+
+Primary:
+    Number
+    ( Expression )
+    - Primary
+    + Primary
+
+Number:
+    floating-point-literal
+
+Data come from cin stream, go through ts name Token_stream.
+*/
+
 #include "../../../headers/std_lib_facilities.h"
+
+void read_from_test_file() {
+    string iname = "test_file.txt";
+    ifstream ist{ iname };
+    if (!ist) error("Could not open the test file.");
+}
+void write_to_log_file() {
+    string oname = "logs.txt";
+    ofstream ost{ oname };
+    if (!ost) error("Could not open the logs file.");
+}
+void run_tests() {
+    read_from_test_file();
+}
 
 const char number = '8';
 const char quit = 'x';
