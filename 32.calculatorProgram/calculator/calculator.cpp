@@ -7,18 +7,26 @@ Made by: Szeri september 2024
 This program implements fundamental expresions for calculator.
 Data is taken by input stream cin and passed to output stream cout.
 
-Input data grammar:
-
-Statement:
-    Expression
-    Print
-    Quit
-
 Print:
     =
 
 Quit:
     x
+
+Input data grammar:
+
+Calculation:
+    Statement
+    Print
+    Quit
+    Calculation Satement
+
+Statement:
+    Declaration
+    Expresion
+
+Declaration:
+    "let" Name "=" Expression
 
 Expression:
     Term
@@ -60,8 +68,11 @@ void run_tests() {
 }
 
 const char number = '8';
-const char quit = 'x';
-const char print = '=';
+const char quit = 'k';
+const char print = ';';
+const char name = 'a';
+const char let = 'L';
+const string declkey = "let";
 const string prompt = "> ";
 const string result = "= ";
 
@@ -69,10 +80,13 @@ class Token {
 public:
     char kind;
     double value;
+    string name;
     Token(char ch)
         :kind(ch), value(0) { }
     Token(char ch, double val)
         :kind(ch), value(val) { }
+    Token(char ch, string n) 
+        :kind(ch), name(n) { }
 };
 
 class Token_stream {
@@ -80,6 +94,7 @@ public:
     Token_stream();
     Token get();
     void putback(Token t);
+    void ignore(char c);
 private:
     bool full;
     Token buffer;
@@ -87,11 +102,6 @@ private:
 
 Token_stream::Token_stream() :full(false), buffer(0) {}
 
-void Token_stream::putback(Token t) {
-    if (full) error("Calling putback(), when buffer is full.");
-    buffer = t;
-    full = true;
-}
 Token Token_stream::get() {
     // Reads chars from input stream and creates tokens
     if (full) { // checks if token is ready
@@ -103,8 +113,9 @@ Token Token_stream::get() {
     cin >> ch; // Atention: >> skips whitespaces (spaces, new lines, tabulators etc.)
     switch (ch)
     {
+    case print:
+    case quit:
     case '=':
-    case 'x':
     case '!': case '(': case ')': case '{': case '}':
     case  '+': case '-': case '*': case '/': case '%':
         return Token(ch);
@@ -118,10 +129,62 @@ Token Token_stream::get() {
         return Token(number, val);
     }
     default:
+        if (isalpha(ch)) {
+            string s;
+            s += ch;
+            while (cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+                s += ch;
+            cin.putback(ch);
+            if (s == declkey) return Token(let);
+            return Token(name, s);
+        }
         error("Invalid token.");
     }
-    return -1;
 }
+
+void Token_stream::putback(Token t) {
+    if (full) error("Calling putback(), when buffer is full.");
+    buffer = t;
+    full = true;
+}
+
+void Token_stream::ignore(char c) {
+    if (full && c == buffer.kind) {
+        full = false;
+        return;
+    }
+    full = false;
+    char ch = 0;
+    while (cin >> ch)
+        if (ch == c) return;
+}
+
+class Variable {
+public:
+    string name;
+    double value;
+    Variable(string name, double value) 
+        : name(name), value(value) {}
+};
+
+vector<Variable> var_table;
+
+double get_value(string s) {
+    // Return value of s variable
+    for (int i = 0; i < var_table.size(); ++i)
+        if (var_table[i].name == s) return var_table[i].value;
+    error("Getting: Undefined variable.", s);
+}
+
+void set_value(string s, double d) {
+    for (int i = 0; i < var_table.size(); ++i)
+        if (var_table[i].name == s) {
+            var_table[i].value = d;
+            return;
+        }
+    error("Setting: undefined variable.", s);
+}
+
 
 int factorial(int factor) {
     if (factor == 0) {
@@ -133,7 +196,23 @@ int factorial(int factor) {
     return factor * factorial(factor - 1);
 }
 
+bool is_declared(string var) {
+    for (int i = 0; i < var_table.size(); ++i)
+        if (var_table[i].name == var) return true;
+    return false;
+}
+
+double define_name(string var, double val) {
+    if (is_declared(var)) error(var, " - duplicated declaration.");
+    var_table.push_back(Variable(var, val));
+    return val;
+}
+
 Token_stream ts;
+
+double statement();
+
+double declaration();
 
 double expression();
 
@@ -148,25 +227,36 @@ void print_instruction() {
         << endl
         << "You can use +, -, *, / operators."
         << endl
-        << "To print result use = and to close program use 'x' key."
+        << "To print result use " << print << " and to close program use " << quit << " key."
         << endl;
     return;
 }
 
-void calculate() {
-    while (cin) {
-        cout << prompt;
-        Token t = ts.get();
+void clean_up_mess() {
+    ts.ignore(print);
+}
 
-        while (t.kind == print) t = ts.get();
-        if (t.kind == quit) return;
-        ts.putback(t);
-        cout << result << expression() << endl;
+void calculate() {
+    while (cin) 
+        try {
+            cout << prompt;
+            Token t = ts.get();
+
+            while (t.kind == print) t = ts.get();
+            if (t.kind == quit) return;
+            ts.putback(t);
+            cout << result << statement() << endl;
+        }
+    catch (exception& e) {
+        cerr << e.what() << endl;
+        clean_up_mess();
     }
 }
 
 int main()
 try {
+    define_name("pi", 3.1415926535);
+    define_name("e", 2.7182818284);
     print_instruction();
     calculate();
     keep_window_open();
@@ -183,8 +273,30 @@ catch (...) {
     return 2;
 }
 
-double expression()
-{
+double statement() {
+    Token t = ts.get();
+    switch (t.kind) {
+    case let:
+        return declaration();
+    default:
+        ts.putback(t);
+        return expression();
+    }
+}
+
+double declaration() {
+    Token t = ts.get();
+    if (t.kind != name) error("Expected name in declaration.");
+    string var_name = t.name;
+
+    Token t2 = ts.get();
+    if (t2.kind != '=') error("Missing = sign in variable declaration.", var_name);
+    double d = expression();
+    define_name(var_name, d);
+    return d;
+}
+
+double expression() {
     double left = term();
     Token t = ts.get();
 
@@ -205,8 +317,7 @@ double expression()
     }
 }
 
-double term()
-{
+double term() {
     double left = primary();
     Token t = ts.get();
 
@@ -251,8 +362,7 @@ double term()
     }
 }
 
-double primary() 
-{
+double primary() {
     Token t = ts.get();
     switch (t.kind) {
     case '{':
@@ -286,6 +396,7 @@ double primary()
     case '+':
         return primary();
     default:
+        cout << t.kind << endl;
         error("Primary was expected.");
     }
 }
