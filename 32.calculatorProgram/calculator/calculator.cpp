@@ -53,6 +53,8 @@ Data come from cin stream, go through ts name Token_stream.
 
 #include "../../../headers/std_lib_facilities.h"
 
+// Testing from the file section
+
 void read_from_test_file() {
     string iname = "test_file.txt";
     ifstream ist{ iname };
@@ -86,7 +88,7 @@ public:
     Token(char ch, double val)
         :kind(ch), value(val) { }
     Token(char ch, string n) 
-        :kind(ch), name(n) { }
+        :kind(ch), value(0), name(n) { }
 };
 
 class Token_stream {
@@ -149,6 +151,7 @@ void Token_stream::putback(Token t) {
 }
 
 void Token_stream::ignore(char c) {
+    // Takes Tokens from a Token stream while frist char c occures
     if (full && c == buffer.kind) {
         full = false;
         return;
@@ -160,6 +163,7 @@ void Token_stream::ignore(char c) {
 }
 
 class Variable {
+// Class for defining variables in calculator
 public:
     string name;
     double value;
@@ -173,10 +177,11 @@ double get_value(string s) {
     // Return value of s variable
     for (int i = 0; i < var_table.size(); ++i)
         if (var_table[i].name == s) return var_table[i].value;
-    error("Getting: Undefined variable.", s);
+    error("Getting: undefined variable.", s);
 }
 
 void set_value(string s, double d) {
+    // Change value of existing Variable
     for (int i = 0; i < var_table.size(); ++i)
         if (var_table[i].name == s) {
             var_table[i].value = d;
@@ -197,12 +202,14 @@ int factorial(int factor) {
 }
 
 bool is_declared(string var) {
+    // Checks if variable exists in vector
     for (int i = 0; i < var_table.size(); ++i)
         if (var_table[i].name == var) return true;
     return false;
 }
 
 double define_name(string var, double val) {
+    // Creates and add variable object if doesn't already exists
     if (is_declared(var)) error(var, " - duplicated declaration.");
     var_table.push_back(Variable(var, val));
     return val;
@@ -292,6 +299,7 @@ double declaration() {
     Token t2 = ts.get();
     if (t2.kind != '=') error("Missing = sign in variable declaration.", var_name);
     double d = expression();
+    cout << "d: " << d << endl;
     define_name(var_name, d);
     return d;
 }
@@ -396,7 +404,10 @@ double primary() {
     case '+':
         return primary();
     default:
-        cout << t.kind << endl;
+        if (t.kind == 'a') {
+            return get_value(t.name);
+
+        }
         error("Primary was expected.");
     }
 }
