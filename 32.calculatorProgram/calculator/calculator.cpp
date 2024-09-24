@@ -44,6 +44,7 @@ Primary:
     ( Expression )
     - Primary
     + Primary
+    sqrt ( Primary )
 
 Number:
     floating-point-literal
@@ -65,16 +66,15 @@ void write_to_log_file() {
     ofstream ost{ oname };
     if (!ost) error("Could not open the logs file.");
 }
-void run_tests() {
-    read_from_test_file();
-}
 
 const char number = '8';
 const char quit = 'k';
 const char print = ';';
 const char name = 'a';
 const char let = 'L';
+const char sqrtsign = 'S';
 const string declkey = "let";
+const string sqrtkey = "sqrt";
 const string prompt = "> ";
 const string result = "= ";
 
@@ -138,6 +138,7 @@ Token Token_stream::get() {
                 s += ch;
             cin.putback(ch);
             if (s == declkey) return Token(let);
+            if (s == sqrtkey) return Token(sqrtsign);
             return Token(name, s);
         }
         error("Invalid token.");
@@ -264,6 +265,7 @@ int main()
 try {
     define_name("pi", 3.1415926535);
     define_name("e", 2.7182818284);
+    define_name("k", 1000);
     print_instruction();
     calculate();
     keep_window_open();
@@ -299,7 +301,6 @@ double declaration() {
     Token t2 = ts.get();
     if (t2.kind != '=') error("Missing = sign in variable declaration.", var_name);
     double d = expression();
-    cout << "d: " << d << endl;
     define_name(var_name, d);
     return d;
 }
@@ -403,6 +404,12 @@ double primary() {
         return -primary();
     case '+':
         return primary();
+    case sqrtsign:
+    {
+        double d = primary();
+        if (d < 1) error("Sqrt only from positive numebrs.");
+        return sqrt(d);
+    }
     default:
         if (t.kind == 'a') {
             return get_value(t.name);

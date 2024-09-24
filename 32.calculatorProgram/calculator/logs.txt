@@ -1,1 +1,5 @@
-Invalid token.
+= 3
+= 0
+= 123
+= 3
+Primary was expected.
