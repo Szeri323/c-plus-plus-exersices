@@ -46,24 +46,24 @@ int main() {
 	cout << "switch instruction - other variant of if. It allows from single char, numbers values and enums in condition.\n";
 	cout << "while instruction - other variant of for instruction. It works till the condition is true. It doesn't contain initialization or actualization.\n";
 	cout << "iteration - it is one cicle of the loop.\n";
-	cout << "l-value - \n";
-	cout << "loop - \n";
-	cout << "repetition - \n";
-	cout << "processing - \n";
-	cout << "push_back() - \n";
-	cout << "r-value - \n";
+	cout << "l-value - left side of the expression, eg int a = 2, where 'int a' is left value of the expression.\n";
+	cout << "loop - instruction that reapet the instructions written in definiton of the loop.\n";
+	cout << "repetition - do something one more time.\n";
+	cout << "processing - executing some insctrucions or calculating something.\n";
+	cout << "push_back() - it is a class method. It could be defined by programer, but in default (cin.put_back(c)) it puts a c value back into a cin stream.\n";
+	cout << "r-value - right side of the expression.\n";
 	cout << "selection - \n";
-	cout << "size() - \n";
-	cout << "sort() - \n";
-	cout << "vector - \n";
-	cout << "expression - \n";
-	cout << "range for instruction - \n";
+	cout << "size() - vector class method that return count of the elements in a structure.\n";
+	cout << "sort() - vector method that takes two iterators (some_name.begin(), some_name.end()) and return a sorted structure.\n";
+	cout << "vector - specific dynamic structure similiar to the array, but with dynamic allocation of memmory, so we can add elements even if vector is 'full'.\n";
+	cout << "expression - it is component that we can use in instructions, eg. 1 + 2  is expression.\n";
+	cout << "ranged for instruction - it is special tape of for loop. Its task is to go through every element in a structure, from begining to end. We cant specifia number of iterations in this type of loop.\n";
 
 	cout << "\n\n--- Chapter 5 - Errors ---\n\n";
 
-	cout << "assertion - \n";
-	cout << "error - \n";
-	cout << "runtime error - \n";
+	cout << "assertion - we checking if the value passed by us, is the same value that program will return. \n";
+	cout << "error - it is a situation in our program when something went differently than expected.\n";
+	cout << "runtime error - this type of error occurs at the same top when program is compiled, linked and while programm is ranning (in execution stage).\n";
 	cout << "compilation error - \n";
 	cout << "consolidation error - \n";
 	cout << "sytax error - \n";
@@ -80,7 +80,7 @@ int main() {
 	cout << "exception - \n";
 	cout << "requirement - \n";
 
-	cout << "\n\n--- Chapter 5 - Writing a program ---\n\n";
+	cout << "\n\n--- Chapter 6 - Writing a program ---\n\n";
 	
 	cout << "analysis - It is process befor designing project, where came up to collect\n";
 	cout << "parser (syntax analizer) - \n";
@@ -101,6 +101,18 @@ int main() {
 	cout << "token - \n";
 	cout << "class data member - \n";
 
+	cout << "\n\n--- Chapter 7 - Finishing a program ---\n\n";
+	
+	cout << "version history - \n";
+	cout << "commenting - \n";
+	cout << "fuctions multiplication - \n";
+	cout << "errors handling - \n";
+	cout << "recovery - \n";
+	cout << "symbolic constant - \n";
+	cout << "backbone - small pice of source code, that need to work and simply make job well. Writen in first stage of coding or for prototyping.\n";
+	cout << "testing - \n";
+	cout << "code aligment - \n";
+	cout << "code maintenance - \n";
 
 
 	return 0;
