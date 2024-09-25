@@ -45,6 +45,7 @@ Primary:
     - Primary
     + Primary
     sqrt ( Primary )
+    pow ( expresion )
 
 Number:
     floating-point-literal
@@ -68,17 +69,21 @@ void write_to_log_file() {
 }
 
 const char number = '8';
-const char quit = 'k';
+const char quit = 'e';
 const char print = ';';
 const char name = 'a';
 const char let = 'L';
 const char sqrtsign = 'S';
+const char powsign = 'P';
 const string declkey = "let";
 const string sqrtkey = "sqrt";
+const string powkey = "pow";
+const string quitkey = "end";
 const string prompt = "> ";
 const string result = "= ";
 
 class Token {
+// Get char from cin and define if it is char or number or variable name
 public:
     char kind;
     double value;
@@ -92,6 +97,7 @@ public:
 };
 
 class Token_stream {
+// It is buffer for Tokens
 public:
     Token_stream();
     Token get();
@@ -116,7 +122,8 @@ Token Token_stream::get() {
     switch (ch)
     {
     case print:
-    case quit:
+    /*case quit:*/
+    case ',':
     case '=':
     case '!': case '(': case ')': case '{': case '}':
     case  '+': case '-': case '*': case '/': case '%':
@@ -131,6 +138,15 @@ Token Token_stream::get() {
         return Token(number, val);
     }
     default:
+        // if (ch == '#') set declaration keyword to # from let
+        //if (ch == '#') {
+        //    string s;
+        //    s += ch;
+        //    while (cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+        //        s += ch;
+        //    cin.putback(ch);
+        //    if (s == declkey) return Token(let);
+        //}
         if (isalpha(ch)) {
             string s;
             s += ch;
@@ -139,6 +155,8 @@ Token Token_stream::get() {
             cin.putback(ch);
             if (s == declkey) return Token(let);
             if (s == sqrtkey) return Token(sqrtsign);
+            if (s == powkey) return Token(powsign);
+            if (s == quitkey) return Token(quit);
             return Token(name, s);
         }
         error("Invalid token.");
@@ -409,6 +427,22 @@ double primary() {
         double d = primary();
         if (d < 1) error("Sqrt only from positive numebrs.");
         return sqrt(d);
+    }
+    case powsign:
+    {
+        Token t = ts.get();
+        if (t.kind != '(') error("Invalid pow operation. Missing ( sign.");
+        Token t2 = ts.get();
+        if (t2.kind != number) error("Invalid pow opertation. First argument should be number.");
+        double x = t2.value;
+        Token t3 = ts.get();
+        if (t3.kind != ',') error("Invalid pow operation. Missing , sign.");
+        Token t4 = ts.get();
+        if (t4.kind != number) error("Invalid pow opertation. Second argument should be number.");
+        int i = narrow_cast<int>(t4.value);
+        Token t5 = ts.get();
+        if (t5.kind != ')') error("Invalid pow operation. Missing ) sign.");
+        return pow(x, i);
     }
     default:
         if (t.kind == 'a') {
