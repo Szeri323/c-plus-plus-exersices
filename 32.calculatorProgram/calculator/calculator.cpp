@@ -23,10 +23,14 @@ Calculation:
 
 Statement:
     Declaration
+    Conast Declaration
     Expresion
 
 Declaration:
     "let" Name "=" Expression
+
+Const Declaration:
+    "const" Name "=" Expression
 
 Expression:
     Term
@@ -73,9 +77,11 @@ const char quit = 'e';
 const char print = ';';
 const char name = 'a';
 const char let = 'L';
+const char constant = 'C';
 const char sqrtsign = 'S';
 const char powsign = 'P';
-const string declkey = "let";
+const string varkey = "let";
+const string constkey = "const";
 const string sqrtkey = "sqrt";
 const string powkey = "pow";
 const string quitkey = "end";
@@ -124,6 +130,7 @@ Token Token_stream::get() {
     case print:
     /*case quit:*/
     case ',':
+    case '_':
     case '=':
     case '!': case '(': case ')': case '{': case '}':
     case  '+': case '-': case '*': case '/': case '%':
@@ -150,10 +157,11 @@ Token Token_stream::get() {
         if (isalpha(ch)) {
             string s;
             s += ch;
-            while (cin.get(ch) && (isalpha(ch) || isdigit(ch)))
+            while (cin.get(ch) && (isalpha(ch) || isdigit(ch) || ch == '_'))
                 s += ch;
             cin.putback(ch);
-            if (s == declkey) return Token(let);
+            if (s == varkey) return Token(let);
+            if (s == constkey) return Token(constant);
             if (s == sqrtkey) return Token(sqrtsign);
             if (s == powkey) return Token(powsign);
             if (s == quitkey) return Token(quit);
@@ -186,8 +194,9 @@ class Variable {
 public:
     string name;
     double value;
-    Variable(string name, double value) 
-        : name(name), value(value) {}
+    bool constant;
+    Variable(string name, double value, bool constant) 
+        : name(name), value(value), constant(constant){}
 };
 
 vector<Variable> var_table;
@@ -202,13 +211,29 @@ double get_value(string s) {
 void set_value(string s, double d) {
     // Change value of existing Variable
     for (int i = 0; i < var_table.size(); ++i)
-        if (var_table[i].name == s) {
-            var_table[i].value = d;
-            return;
+        if (var_table[i].name == s){
+            if (!var_table[i].constant) {
+                var_table[i].value = d;
+                return;
+            }
+            error("Setting: variable is constant.");
         }
     error("Setting: undefined variable.", s);
 }
 
+bool is_declared(string var) {
+    // Checks if variable exists in vector
+    for (int i = 0; i < var_table.size(); ++i)
+        if (var_table[i].name == var) return true;
+    return false;
+}
+
+double define_name(string var, double val, bool constant) {
+    // Creates and add variable object if doesn't already exists
+    if (is_declared(var)) error(var, " - duplicated declaration.");
+    var_table.push_back(Variable(var, val, constant));
+    return val;
+}
 
 int factorial(int factor) {
     if (factor == 0) {
@@ -220,25 +245,13 @@ int factorial(int factor) {
     return factor * factorial(factor - 1);
 }
 
-bool is_declared(string var) {
-    // Checks if variable exists in vector
-    for (int i = 0; i < var_table.size(); ++i)
-        if (var_table[i].name == var) return true;
-    return false;
-}
-
-double define_name(string var, double val) {
-    // Creates and add variable object if doesn't already exists
-    if (is_declared(var)) error(var, " - duplicated declaration.");
-    var_table.push_back(Variable(var, val));
-    return val;
-}
-
 Token_stream ts;
 
 double statement();
 
 double declaration();
+
+double const_declaration();
 
 double expression();
 
@@ -281,9 +294,9 @@ void calculate() {
 
 int main()
 try {
-    define_name("pi", 3.1415926535);
-    define_name("e", 2.7182818284);
-    define_name("k", 1000);
+    define_name("pi", 3.1415926535, true);
+    define_name("e", 2.7182818284, true);
+    define_name("k", 1000, true);
     print_instruction();
     calculate();
     keep_window_open();
@@ -303,8 +316,15 @@ catch (...) {
 double statement() {
     Token t = ts.get();
     switch (t.kind) {
+    case constant:
     case let:
+        ts.putback(t);
         return declaration();
+    case name:
+    {
+        ts.putback(t);
+        return expression();
+    }
     default:
         ts.putback(t);
         return expression();
@@ -313,14 +333,28 @@ double statement() {
 
 double declaration() {
     Token t = ts.get();
-    if (t.kind != name) error("Expected name in declaration.");
-    string var_name = t.name;
+    if (t.kind == let) {
+        Token t2 = ts.get();
+        if (t2.kind != name) error("Expected name in declaration.");
+        string var_name = t2.name;
 
-    Token t2 = ts.get();
-    if (t2.kind != '=') error("Missing = sign in variable declaration.", var_name);
-    double d = expression();
-    define_name(var_name, d);
-    return d;
+        Token t3 = ts.get();
+        if (t3.kind != '=') error("Missing = sign in variable declaration.", var_name);
+        double d = expression();
+        define_name(var_name, d, false);
+        return d;
+    }
+    else if (t.kind == constant){
+        Token t2 = ts.get();
+        if (t2.kind != name) error("Expected name in declaration.");
+        string var_name = t2.name;
+
+        Token t3 = ts.get();
+        if (t3.kind != '=') error("Missing = sign in variable declaration.", var_name);
+        double d = expression();
+        define_name(var_name, d, true);
+        return d;
+    }
 }
 
 double expression() {
@@ -418,18 +452,34 @@ double primary() {
         }
         return d;
     }
+    case name:
+        if (is_declared(t.name)) {
+            Token t2 = ts.get();
+            if (t2.kind == '=') {
+                double d = expression();
+                set_value(t.name, d);
+                return get_value(t.name);
+            }
+            else {
+                ts.putback(t2);
+                return get_value(t.name);
+            }
+        }
+        error("Name is not declared.");
     case '-':
         return -primary();
     case '+':
         return primary();
     case sqrtsign:
     {
+        // allows to use expression like sqrt(3*3) or sqrt(2.5) and use sqrt from std lib to return result
         double d = primary();
         if (d < 1) error("Sqrt only from positive numebrs.");
         return sqrt(d);
     }
     case powsign:
     {
+        // checks if format is pow(double, int) and use pow(x,i) form std lib to return result
         Token t = ts.get();
         if (t.kind != '(') error("Invalid pow operation. Missing ( sign.");
         Token t2 = ts.get();
