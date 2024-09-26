@@ -8,10 +8,16 @@ This program implements fundamental expresions for calculator.
 Data is taken by input stream cin and passed to output stream cout.
 
 Print:
-    =
+    ;
 
 Quit:
-    x
+    end
+
+Keywords:
+    let (variable = <double>value)
+    const (constant = <double>value)
+    sqrt (<double>value)
+    pow (<double>value, <int>exponent)
 
 Input data grammar:
 
@@ -23,13 +29,10 @@ Calculation:
 
 Statement:
     Declaration
-    Conast Declaration
     Expresion
 
 Declaration:
     "let" Name "=" Expression
-
-Const Declaration:
     "const" Name "=" Expression
 
 Expression:
@@ -251,8 +254,6 @@ double statement();
 
 double declaration();
 
-double const_declaration();
-
 double expression();
 
 double term();
@@ -333,28 +334,16 @@ double statement() {
 
 double declaration() {
     Token t = ts.get();
-    if (t.kind == let) {
-        Token t2 = ts.get();
-        if (t2.kind != name) error("Expected name in declaration.");
-        string var_name = t2.name;
 
-        Token t3 = ts.get();
-        if (t3.kind != '=') error("Missing = sign in variable declaration.", var_name);
-        double d = expression();
-        define_name(var_name, d, false);
-        return d;
-    }
-    else if (t.kind == constant){
-        Token t2 = ts.get();
-        if (t2.kind != name) error("Expected name in declaration.");
-        string var_name = t2.name;
+    Token t2 = ts.get();
+    if (t2.kind != name) error("Expected name in declaration.");
+    string var_name = t2.name;
 
-        Token t3 = ts.get();
-        if (t3.kind != '=') error("Missing = sign in variable declaration.", var_name);
-        double d = expression();
-        define_name(var_name, d, true);
-        return d;
-    }
+    Token t3 = ts.get();
+    if (t3.kind != '=') error("Missing = sign in variable declaration.", var_name);
+    double d = expression();
+    (t.kind == let) ? define_name(var_name, d, false) : define_name(var_name, d, true); // check if constant or not
+    return d;
 }
 
 double expression() {
@@ -482,16 +471,21 @@ double primary() {
         // checks if format is pow(double, int) and use pow(x,i) form std lib to return result
         Token t = ts.get();
         if (t.kind != '(') error("Invalid pow operation. Missing ( sign.");
+
         Token t2 = ts.get();
         if (t2.kind != number) error("Invalid pow opertation. First argument should be number.");
         double x = t2.value;
+
         Token t3 = ts.get();
         if (t3.kind != ',') error("Invalid pow operation. Missing , sign.");
+
         Token t4 = ts.get();
         if (t4.kind != number) error("Invalid pow opertation. Second argument should be number.");
         int i = narrow_cast<int>(t4.value);
+
         Token t5 = ts.get();
         if (t5.kind != ')') error("Invalid pow operation. Missing ) sign.");
+
         return pow(x, i);
     }
     default:
