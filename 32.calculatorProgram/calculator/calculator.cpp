@@ -202,16 +202,25 @@ public:
         : name(name), value(value), constant(constant){}
 };
 
-vector<Variable> var_table;
+class Symbol_table {
+public:
+    double get(string s);
+    void set(string s, double d);
+    bool is_declared(string var);
+    double define(string var, double val, bool constant);
+private:
+    vector<Variable> var_table;
+};
 
-double get_value(string s) {
+
+double Symbol_table::get(string s) {
     // Return value of s variable
     for (int i = 0; i < var_table.size(); ++i)
         if (var_table[i].name == s) return var_table[i].value;
     error("Getting: undefined variable.", s);
 }
 
-void set_value(string s, double d) {
+void Symbol_table::set(string s, double d) {
     // Change value of existing Variable
     for (int i = 0; i < var_table.size(); ++i)
         if (var_table[i].name == s){
@@ -224,14 +233,14 @@ void set_value(string s, double d) {
     error("Setting: undefined variable.", s);
 }
 
-bool is_declared(string var) {
+bool Symbol_table::is_declared(string var) {
     // Checks if variable exists in vector
     for (int i = 0; i < var_table.size(); ++i)
         if (var_table[i].name == var) return true;
     return false;
 }
 
-double define_name(string var, double val, bool constant) {
+double Symbol_table::define(string var, double val, bool constant) {
     // Creates and add variable object if doesn't already exists
     if (is_declared(var)) error(var, " - duplicated declaration.");
     var_table.push_back(Variable(var, val, constant));
@@ -249,6 +258,8 @@ int factorial(int factor) {
 }
 
 Token_stream ts;
+
+Symbol_table symtab;
 
 double statement();
 
@@ -295,9 +306,9 @@ void calculate() {
 
 int main()
 try {
-    define_name("pi", 3.1415926535, true);
-    define_name("e", 2.7182818284, true);
-    define_name("k", 1000, true);
+    symtab.define("pi", 3.1415926535, true);
+    symtab.define("e", 2.7182818284, true);
+    symtab.define("k", 1000, true);
     print_instruction();
     calculate();
     keep_window_open();
@@ -342,7 +353,7 @@ double declaration() {
     Token t3 = ts.get();
     if (t3.kind != '=') error("Missing = sign in variable declaration.", var_name);
     double d = expression();
-    (t.kind == let) ? define_name(var_name, d, false) : define_name(var_name, d, true); // check if constant or not
+    (t.kind == let) ? symtab.define(var_name, d, false) : symtab.define(var_name, d, true); // check if constant or not
     return d;
 }
 
@@ -442,16 +453,16 @@ double primary() {
         return d;
     }
     case name:
-        if (is_declared(t.name)) {
+        if (symtab.is_declared(t.name)) {
             Token t2 = ts.get();
             if (t2.kind == '=') {
                 double d = expression();
-                set_value(t.name, d);
-                return get_value(t.name);
+                symtab.set(t.name, d);
+                return symtab.get(t.name);
             }
             else {
                 ts.putback(t2);
-                return get_value(t.name);
+                return symtab.get(t.name);
             }
         }
         error("Name is not declared.");
@@ -490,7 +501,7 @@ double primary() {
     }
     default:
         if (t.kind == 'a') {
-            return get_value(t.name);
+            return symtab.get(t.name);
 
         }
         error("Primary was expected.");
