@@ -127,7 +127,7 @@ Token Token_stream::get() {
     }
 
     char ch;
-    cin >> ch; // Atention: >> skips whitespaces (spaces, new lines, tabulators etc.)
+    cin.get(ch); // Atention: >> skips whitespaces (spaces, new lines, tabulators etc.)
     switch (ch)
     {
     case print:
@@ -147,6 +147,8 @@ Token Token_stream::get() {
         cin >> val;
         return Token(number, val);
     }
+    case '\n':
+        return Token(print);
     default:
         // if (ch == '#') set declaration keyword to # from let
         //if (ch == '#') {
@@ -157,6 +159,7 @@ Token Token_stream::get() {
         //    cin.putback(ch);
         //    if (s == declkey) return Token(let);
         //}
+
         if (isalpha(ch)) {
             string s;
             s += ch;
