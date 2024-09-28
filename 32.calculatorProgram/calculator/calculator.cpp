@@ -78,6 +78,7 @@ void write_to_log_file() {
 const char number = '8';
 const char quit = 'e';
 const char print = ';';
+const char help = 'h';
 const char name = 'a';
 const char let = 'L';
 const char constant = 'C';
@@ -88,6 +89,7 @@ const string constkey = "const";
 const string sqrtkey = "sqrt";
 const string powkey = "pow";
 const string quitkey = "end";
+const string helpkey = "help";
 const string prompt = "> ";
 const string result = "= ";
 
@@ -173,6 +175,7 @@ Token Token_stream::get() {
             if (s == sqrtkey) return Token(sqrtsign);
             if (s == powkey) return Token(powsign);
             if (s == quitkey) return Token(quit);
+            if (s == helpkey) return Token(help);
             return Token(name, s);
         }
         error("Invalid token.");
@@ -278,8 +281,14 @@ double primary();
 
 void print_instruction() {
     cout << "Welcome in our simple calculator."
-        << endl
-        << "In expresions use double type numbers."
+        << endl 
+        << "To see help write 'help' and press enter."
+        << endl;
+    return;
+}
+
+void print_help() {
+    cout << "In expresions use double type numbers."
         << endl
         << "You can use +, -, *, / operators."
         << endl
@@ -297,8 +306,20 @@ void calculate() {
         try {
             cout << prompt;
             Token t = ts.get();
-
-            while (t.kind == print) t = ts.get();
+            if (t.kind == 'h') {
+                print_help();
+                cout << prompt;
+                t = ts.get();
+            }
+            while (t.kind == print) {
+                t = ts.get();
+                if (t.kind == 'h') {
+                    print_help();
+                    cout << prompt;
+                    t = ts.get();
+                }
+            }
+                
             if (t.kind == quit) return;
             ts.putback(t);
             cout << result << statement() << endl;
