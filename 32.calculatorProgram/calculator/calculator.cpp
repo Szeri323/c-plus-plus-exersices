@@ -509,19 +509,15 @@ double primary() {
         Token t = ts.get();
         if (t.kind != '(') error("Invalid pow operation. Missing ( sign.");
 
-        Token t2 = ts.get();
-        if (t2.kind != number) error("Invalid pow opertation. First argument should be number.");
-        double x = t2.value;
+        double x = primary();
 
         Token t3 = ts.get();
         if (t3.kind != ',') error("Invalid pow operation. Missing , sign.");
 
-        Token t4 = ts.get();
-        if (t4.kind != number) error("Invalid pow opertation. Second argument should be number.");
-        int i = narrow_cast<int>(t4.value);
+        int i = narrow_cast<int>(primary());
 
-        Token t5 = ts.get();
-        if (t5.kind != ')') error("Invalid pow operation. Missing ) sign.");
+        Token t4 = ts.get();
+        if (t4.kind != ')') error("Invalid pow operation. Missing ) sign.");
 
         return pow(x, i);
     }
