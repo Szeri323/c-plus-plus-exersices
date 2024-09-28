@@ -128,6 +128,8 @@ Token Token_stream::get() {
 
     char ch;
     cin.get(ch); // Atention: >> skips whitespaces (spaces, new lines, tabulators etc.)
+    while (ch == ' ')
+        cin.get(ch);
     switch (ch)
     {
     case print:
