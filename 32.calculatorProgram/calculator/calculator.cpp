@@ -10,20 +10,24 @@ Data is taken by input stream cin and passed to output stream cout.
 Print:
     ;
 
+Help:
+    help
+
 Quit:
     end
 
 Keywords:
-    let (variable = <double>value)
-    const (constant = <double>value)
-    sqrt (<double>value)
-    pow (<double>value, <int>exponent)
+    let
+    const
+    sqrt
+    pow
 
 Input data grammar:
 
 Calculation:
     Statement
     Print
+    Help
     Quit
     Calculation Satement
 
@@ -34,6 +38,8 @@ Statement:
 Declaration:
     "let" Name "=" Expression
     "const" Name "=" Expression
+    (declared) Name "=" Expresion
+    (declared, no const) Name "=" (declared) Name
 
 Expression:
     Term
@@ -49,10 +55,10 @@ Term:
 Primary:
     Number
     ( Expression )
-    - Primary
-    + Primary
+    - Number
+    + Number
     sqrt ( Primary )
-    pow ( expresion )
+    pow ( Primary, int<Primary> )
 
 Number:
     floating-point-literal
@@ -76,7 +82,7 @@ void write_to_log_file() {
 }
 
 const char number = '8';
-const char quit = 'e';
+const char quit = 'E';
 const char print = ';';
 const char help = 'h';
 const char name = 'a';
@@ -201,7 +207,7 @@ void Token_stream::ignore(char c) {
 }
 
 class Variable {
-// Class for defining variables in calculator
+// Class for defining variables or constants in calculator
 public:
     string name;
     double value;
@@ -256,12 +262,7 @@ double Symbol_table::define(string var, double val, bool constant) {
 }
 
 int factorial(int factor) {
-    if (factor == 0) {
-        return 1;
-    }
-    if (factor == 1) {
-        return 1;
-    }
+    if (factor == 0 || factor == 1) return 1;
     return factor * factorial(factor - 1);
 }
 
@@ -281,8 +282,8 @@ double primary();
 
 void print_instruction() {
     cout << "Welcome in our simple calculator."
-        << endl 
-        << "To see help write 'help' and press enter."
+        << endl
+        << "To see help write " << helpkey << " and press enter."
         << endl;
     return;
 }
@@ -290,9 +291,27 @@ void print_instruction() {
 void print_help() {
     cout << "In expresions use double type numbers."
         << endl
-        << "You can use +, -, *, / operators."
+        << "Operators:"
         << endl
-        << "To print result use " << print << " and to close program use " << quit << " key."
+        << "\tYou can use +, -, *, /, % operators."
+        << endl
+        << "Negation:"
+        << endl
+        << "\tTo use negation use '!'."
+        << endl
+        << "Brackets:"
+        << endl
+        << "\tBrackets you can use (), {} pairs."
+        << endl
+        << "Variables and constants:"
+        << endl
+        << "\tTo declare variable use '" << varkey << "' for constant use '" << constkey << "' next choose name and by using '=' assign value."
+        << endl
+        << "Change value of name value:"
+        << endl
+        << "\tYou can only change variables by using '='. Constant are unmutable."
+        << endl
+        << "To print result use '" << print << "' or new line sign (enter). For close program use '" << quitkey << "' key."
         << endl;
     return;
 }
@@ -470,12 +489,8 @@ double primary() {
     {
         double d = t.value;
         t = ts.get();
-        if (t.kind == '!') {
-            return factorial(d);
-        }
-        else {
-            ts.putback(t);
-        }
+        if (t.kind == '!') return factorial(d);
+        ts.putback(t);
         return d;
     }
     case name:
@@ -511,21 +526,18 @@ double primary() {
 
         double x = primary();
 
-        Token t3 = ts.get();
-        if (t3.kind != ',') error("Invalid pow operation. Missing , sign.");
+        Token t2 = ts.get();
+        if (t2.kind != ',') error("Invalid pow operation. Missing , sign.");
 
         int i = narrow_cast<int>(primary());
 
-        Token t4 = ts.get();
-        if (t4.kind != ')') error("Invalid pow operation. Missing ) sign.");
+        Token t3 = ts.get();
+        if (t3.kind != ')') error("Invalid pow operation. Missing ) sign.");
 
         return pow(x, i);
     }
     default:
-        if (t.kind == 'a') {
-            return symtab.get(t.name);
-
-        }
+        if (t.kind == 'a') return symtab.get(t.name);
         error("Primary was expected.");
     }
 }
