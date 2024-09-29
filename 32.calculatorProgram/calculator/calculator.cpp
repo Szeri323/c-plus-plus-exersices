@@ -349,26 +349,25 @@ void calculate() {
     }
 }
 
-ifstream read_from_file() {
-    string name = "constants.txt";
-    ifstream ist{ name };
-    if (!ist) error("Could not open the file.");
-    return ist;
-}
-
-void define_constants_from_file() {
-    ifstream ist = read_from_file();
+void define_constants_from_file(ifstream& ist) {
     string name;
     double value;
     bool is_const;
     while (ist >> name >> value >> is_const)
         symtab.define(name, value, is_const);
+}
+
+void read_constants_file() {
+    string name = "constants.txt";
+    ifstream ist{ name };
+    if (!ist) error("Could not open the file.");
+    define_constants_from_file(ist);
     ist.close();
 }
 
 int main()
 try {
-    define_constants_from_file();
+    read_constants_file();
     /*symtab.define("pi", 3.1415926535, true);
     symtab.define("e", 2.7182818284, true);
     symtab.define("k", 1000, true);*/
