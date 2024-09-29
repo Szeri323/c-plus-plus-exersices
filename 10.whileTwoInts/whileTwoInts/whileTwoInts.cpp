@@ -26,6 +26,7 @@ int main() {
 	double min = 0, max = 0, value = 0, sum = 0;
 	string unit;
 	bool flag = true;
+	cout << "Pass value and unit to convert to end use '|':" << endl;
 	while (cin >> value >> unit) {
 		cout << value << unit << "\n";
 		value = conversion(value, unit);
