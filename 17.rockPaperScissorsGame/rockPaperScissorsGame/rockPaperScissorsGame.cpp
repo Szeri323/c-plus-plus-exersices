@@ -1,14 +1,10 @@
 #include "../../../headers/std_lib_facilities.h"
 
-int main() {
+vector<int> setup_game() {
 	vector<int> computer_choices{ 1,3,2,3,2,1,2,3,1,2,3 };
 	vector<int> other;
-	int choice = 0;
-	int current = 0;
-	int computer = 0;
-	int player = 0;
-	int additional_rounds = 0;
 	int temp = 0;
+	int additional_rounds = 0;
 	cout << "Pass adional rounds number: " << endl;
 	cin >> additional_rounds;
 	cout << "Pass " << additional_rounds << " random numbers from 1 to 3: " << endl;
@@ -17,19 +13,26 @@ int main() {
 		if (temp > 0 && temp < 4)
 			other.push_back(temp);
 		else {
-			cout << "Not a valid number." << endl;
-			return 0;
+			error("Invalid number.");
 		}
 	}
-	for (int i = 0; i < other.size(); i+=2) {
-		if (i < computer_choices.size()-1) {
+	for (int i = 0; i < other.size(); i += 2) {
+		if (i < computer_choices.size() - 1) {
 			computer_choices[i] = other[i];
 		}
 		else {
 			computer_choices.push_back(other[i]);
 		}
 	}
-	for (int x: computer_choices)
+	return computer_choices;
+}
+
+vector<int> game(const vector<int> &computer_choices) {
+	int choice = 0;
+	int player_score = 0;
+	int computer_score = 0;
+	
+	for (int x : computer_choices)
 		cout << x << endl;
 	cout << "Rock = 1, Paper = 2, Scissors = 3: " << endl;
 	for (int i = 0; i < computer_choices.size(); ++i) {
@@ -42,42 +45,59 @@ int main() {
 			}
 			else if (computer_choices[i] == 2) {
 				cout << "Computer wins!" << endl;
-				++computer;
+				++computer_score;
 			}
 			else {
 				cout << "Player wins!" << endl;
-				++player;
+				++player_score;
 			}
 			break;
 		case 2:
 			if (computer_choices[i] == 1) {
 				cout << "Player wins!" << endl;
-				++player;
+				++player_score;
 			}
 			else if (computer_choices[i] == 2) {
 				cout << "Draw!" << endl;
 			}
 			else {
 				cout << "Computer wins!" << endl;
-				++computer;
+				++computer_score;
 			}
 			break;
 		case 3:
 			if (computer_choices[i] == 1) {
 				cout << "Computer wins!" << endl;
-				++computer;
+				++computer_score;
 			}
 			else if (computer_choices[i] == 2) {
 				cout << "Player wins!" << endl;
-				++player;
+				++player_score;
 			}
 			else {
 				cout << "Draw!" << endl;
 			}
 			break;
-		}
-		cout << "Player: " << player << endl
-			<< "Computer: " << computer << endl;
-		
+		}		
+	}
+	return vector<int> {player_score, computer_score};
+}
+
+void print_results(const vector<int>& results) {
+	cout << "Player: " << results[0] << endl
+		<< "Computer: " << results[1] << endl;
+	if (results[0] > results[1]) cout << "Player won!" << endl;
+	else if (results[0] < results[1]) cout << "Computer won!" << endl;
+	else cout << "It's a draw!" << endl;
+}
+
+int main() {
+	try {
+		vector<int> computer_choices = setup_game();
+		vector<int> results = game(computer_choices);
+		print_results(results);
+	}
+	catch (exception& e) {
+		cout << e.what() << endl;
 	}
 }
