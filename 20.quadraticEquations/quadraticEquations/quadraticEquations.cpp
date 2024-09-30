@@ -4,15 +4,13 @@ double calculateDelta(double a, double b, double c) {
 	return b * b - 4 * a * c;
 }
 
-int main() {
+void calculate() {
 	double a, b, c;
 	cout << "Pass a, b, c: " << endl;
 	cin >> a >> b >> c;
 	double delta = calculateDelta(a, b, c);
 	cout << "Delta equals: " << delta << endl;
 	if (delta > 0) {
-		cout << delta << endl;
-		cout << sqrt(delta) << endl;
 		cout << "x1: " << (-b - sqrt(delta)) / 2 * a << endl;
 		cout << "x2: " << (-b + sqrt(delta)) / 2 * a << endl;
 	}
@@ -21,5 +19,14 @@ int main() {
 	}
 	else {
 		cout << "Equation does not have solution." << endl;
+	}
+}
+
+int main() {
+	try {
+		calculate();
+	}
+	catch (exception& e) {
+		cout << e.what() << endl;
 	}
 }
