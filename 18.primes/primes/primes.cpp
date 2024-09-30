@@ -35,22 +35,35 @@ vector<int> eratostenesPrimes(int max) {
 	return primes;
 }
 
-int main() {
+void calculate() {
 	int max;
 	cout << "Pass max range for primes: " << endl;
 	cin >> max;
 	vector<int> myPrimes = simplePrimes(max);
-	vector<int> primes = eratostenesPrimes(max);
-	// n primes form vector
-	int n;
-	cin >> n;
-	for (int i = 0; i < n; ++i) {
-		cout << myPrimes[i] << " ";
-	}
+	/*vector<int> primes = eratostenesPrimes(max);*/
 	// all primes for range form 2 to max
-	/*for (int x: myPrimes)
+	/*for (int x : myPrimes)
 		cout << x << " ";
 	cout << endl;
-	for (int x: primes)
-		cout << x << " ";*/
+	for (int x : primes)
+		cout << x << " ";
+	cout << endl;*/
+	// n primes from vector
+	cout << "Write how many numbers from vector myPrimes you want to see:";
+	int n;
+	cin >> n;
+	if (n > myPrimes.size()) error("Number is bigger that vector size.");
+	cout << n << " primes form My primes vector." << endl;
+	for (int i = 0; i < n - 1; ++i) {
+		cout << myPrimes[i] << " ";
+	}
+}
+
+int main() {
+	try {
+		calculate();
+	}
+	catch (exception& e) {
+		cout << e.what() << endl;
+	}
 }
