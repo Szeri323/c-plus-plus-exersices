@@ -1,13 +1,13 @@
 #include "../../../headers/std_lib_facilities.h"
 
-int main() {
+bool logic() {
 	int i = 0;
 	double min = 1, max = 100, current = 50, factor = 25;
 	bool anwser = false;
-	while(true) {
+	bool correct = false;
+	while (true) {
 		cout << "Is the number bigger than " << current << "?" << endl;
 		cin >> anwser;
-		cout << "Factor: " << factor << endl;
 		if (anwser == true) {
 			min = current + 1;
 			current = int(current + factor);
@@ -17,35 +17,25 @@ int main() {
 			current = int(current - factor);
 		}
 		factor = int(factor / 2);
-		cout << "Min: " << min << endl;
-		cout << "Max: " << max << endl;
+		if (factor == 0)
+			factor = 1;
 		++i;
-		if (i == 7) {
+		if (max - min == 0 || i == 7) {
 			cout << "Is your number: " << max << endl;
+			cin >> correct;
 			break;
 		}
 	}
-	/*cout << "Is your number bigger than 50?" << endl;
-	cin >> anwser;
-	if (anwser == true) {
-		cout << "Is your number bigger than 75?" << endl;
-		cin >> anwser;
-		if (anwser == true) {
-			cout << "Is your number bigger than 87?" << endl;
-		}
-		else {
-			cout << "Is your number bigger than 63?" << endl;
-		}
-	}
-	else {
-		cout << "Is your number bigger than 25?" << endl;
-		cin >> anwser;
-		if (anwser == true) {
-			cout << "Is your number bigger than 37?" << endl;
-		}
-		else {
-			cout << "Is your number bigger than 12?" << endl;
-		}
-	}*/
+	return correct;
+}
 
+int main() {
+	try {
+		if (logic()) cout << "My program beat you.\n";
+		else cout << "Congratulations you won!\n";
+		keep_window_open();
+	}
+	catch (const exception& e) {
+		cout << e.what() << endl;
+	}
 }
