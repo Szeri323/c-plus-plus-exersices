@@ -37,10 +37,10 @@ vector<Name_value> populate_vector() {
 void additional_acctions(const vector<Name_value> &v) {
 	string name = "";
 	int age = 0;
-	bool next = false;
-	cout << "Do you want check some names?" << endl;
-	cin >> next;
-	if (next) {
+	bool choice = false;
+	cout << "Do you want check some names yes(1), no (0)?" << endl;
+	cin >> choice;
+	if (choice) {
 		while (cin >> name) {
 			bool found = false;
 			if (name == "Noname") {
@@ -62,8 +62,8 @@ void additional_acctions(const vector<Name_value> &v) {
 		return;
 	}
 	cout << "Do you want check some ages?" << endl;
-	cin >> next;
-	if (next) {
+	cin >> choice;
+	if (choice) {
 		while (cin >> age) {
 			bool found = false;
 			if (age < 1) {
