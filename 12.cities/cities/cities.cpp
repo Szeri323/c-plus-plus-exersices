@@ -1,27 +1,30 @@
 #include "../../../headers/std_lib_facilities.h"
 
-int main() {
-	vector<double> cities;
-	double temp, min = 0, max = 0, sum = 0;
-	bool flag = true;
-	while (cin >> temp) {
-		if (flag == true) {
-			min = temp;
-			max = temp;
-			flag = false;
-		}
-		if (temp < min) {
-			min = temp;
-		}
-		if (temp > max) {
-			max = temp;
-		}
-		cities.push_back(temp);
-		sum += temp;
+void print_results(const vector<double> &cities) {
+	double sum = 0;
+	for (double x : cities) {
+		sum += x;
 	}
 	cout << "Sum: " << sum << endl;
-	cout << "Min: " << min << endl;
-	cout << "Max: " << max << endl;
+	cout << "Min: " << cities[0] << endl;
+	cout << "Max: " << cities[cities.size()-1] << endl;
 	cout << "Avg: " << sum / cities.size() << endl;
+}
 
+void get_values(vector<double>& cities) {
+	double dist;
+	while (cin >> dist)
+		cities.push_back(dist);
+}
+
+int main() {
+	try {
+		vector<double> cities;
+		get_values(cities);
+		sort(cities.begin(), cities.end());
+		print_results(cities);
+	}
+	catch (exception& e) {
+		cout << e.what() << endl;
+	}
 }
