@@ -38,7 +38,6 @@ int wordsToNumber(string number) {
 	}
 }
 
-
 double sum(double x, double y) {
 	return x + y;
 }
@@ -52,7 +51,7 @@ double division(double x, double y) {
 	return x / y;
 }
 
-int main() {
+void logic() {
 	string number1, number2;
 	char sign;
 	double result = 0;
@@ -74,13 +73,20 @@ int main() {
 			result = division(x, y);
 		}
 		else {
-			cout << "Invalid sign." << endl;
-			return 0;
+			error("Invalid sign.");
 		}
 		cout << "Result of " << x << " " << sign << " " << y << ": " << result << endl;
 	}
 	else {
-		cout << "Invalid parameters." << endl;
-		return 0;
+		error("Invalid parameters.");
+	}
+}
+
+int main() {
+	try {
+		logic();
+	}
+	catch (exception& e) {
+		cout << e.what() << endl;
 	}
 }
