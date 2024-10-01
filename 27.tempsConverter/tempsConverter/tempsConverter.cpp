@@ -14,20 +14,16 @@ double ktoc(double k)     // convet celcius to kelvins
 }
 double ctof(double degrees) {
     double result = 9.0 / 5 * degrees + 32;
-    cout << result << endl;
-    cout << result - int(result) << endl;
     if (result - int(result) != 0) error("Result is not int.");
     return result;
 }
 double ftoc(double degrees) {
     double result = (degrees - 32) * 5/9;
-    cout << result << endl;
-    cout << result - int(result) << endl;
     if (result - int(result) != 0) error("Result is not int.");
     return result;
 }
-int main()
-{
+
+void conversion() {
     char unit = 'c';
     char desired_unit = 'k';
     double degrees = 0;       // variable for input data
@@ -39,11 +35,11 @@ int main()
             result = ctok(degrees); // celcius to kelvins conversion
         }
         else if (desired_unit == 'f') {
-            result = ctof(degrees); 
+            result = ctof(degrees);
         }
         else {
             cout << "Not implemented unit." << endl;
-            return 0;
+            return;
         }
     }
     else if (unit == 'k') {
@@ -52,7 +48,7 @@ int main()
         }
         else {
             cout << "Not implemented yet" << endl;
-            return 0;
+            return;
         }
     }
     else if (unit == 'f') {
@@ -60,13 +56,23 @@ int main()
             result = ftoc(degrees);
         }
         else {
-        cout << "Not implemented yet" << endl;
-        return 0;
+            cout << "Not implemented yet" << endl;
+            return;
         }
     }
     else {
-        cout << "Not supported unit.";
-        return -1;
+        error("Not supported unit.");
     }
     cout << result << endl;   // printing temperature
+}
+
+int main()
+{
+    try {
+        conversion();
+    }
+    catch (exception& e) {
+        cout << e.what() << endl;
+    }
+    
 }
