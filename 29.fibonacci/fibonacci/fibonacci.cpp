@@ -1,6 +1,6 @@
 #include "../../../headers/std_lib_facilities.h"
 
-int main() {
+void fibonacci() {
 	vector<int> fibonacci;
 	fibonacci.push_back(1);
 	fibonacci.push_back(1);
@@ -9,5 +9,14 @@ int main() {
 	}
 	for (int x : fibonacci) {
 		cout << x << " ";
+	}
+}
+
+int main() {
+	try {
+		fibonacci();
+	}
+	catch (exception& e) {
+		cout << e.what() << endl;
 	}
 }
