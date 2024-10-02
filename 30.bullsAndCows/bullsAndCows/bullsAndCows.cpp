@@ -125,7 +125,7 @@ void game_loop(vector<T> const& solution) {
 	}
 }
 
-void setup_game() {
+void setup_and_start_game() {
 	while (true) {
 		try {
 			int choice = 0;
@@ -170,7 +170,7 @@ void setup_game() {
 
 int main() {
 	try {
-		setup_game();
+		setup_and_start_game();
 	}
 	catch (exception& e) {
 		cout << e.what() << endl;
