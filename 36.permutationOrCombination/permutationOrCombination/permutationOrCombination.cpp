@@ -12,9 +12,7 @@ inputs: int a,b,choice.
 */
 
 int factorial(int factor) {
-	if (factor == 0)
-		return 1;
-	if (factor == 1)
+	if (factor == 0 || factor == 1)
 		return 1;
 	return factor * factorial(factor - 1);
 }
@@ -22,6 +20,7 @@ int factorial(int factor) {
 int permutation(int a, int b) {
 	if (a < 0 || b < 0) error("Numbers can't be negative.");
 	if (a > 12 || b > 12) error("To big numbers.");
+	if (b > a) error("a - b would be negative.");
 	return (factorial(a) / factorial(a - b));
 }
 
@@ -36,20 +35,19 @@ int main() {
 			cout << "Pass two number:" << endl;
 			int a, b, choice;
 			cin >> a >> b;
+			if (cin.eof()) break;
+			if (!cin) error("Invalid numbers.");
 			cout << "Do you want to calculate permutation (1) or combination (2)?" << endl;
 			cin >> choice;
-			if (choice == 1) {
-				cout << "Permutiation of " << a << " and " << b << " is " << permutation(a, b) << endl;
-			}
-			else if (choice == 2) {
-				cout << "Combination of " << a << " and " << b << " is " << combination(a, b) << endl;
-			}
-			else {
-				error("Wrong choice, choose 1 or 2.");
-			}
+			if (choice == 1) cout << "Permutiation of " << a << " and " << b << " is " << permutation(a, b) << endl;
+			else if (choice == 2) cout << "Combination of " << a << " and " << b << " is " << combination(a, b) << endl;
+			else if (cin.eof()) break;
+			else error("Wrong choice, choose 1 or 2.");
 		}
 		catch (exception& e) {
 			cout << e.what() << endl;
+			cin.clear();
+			cin.ignore();
 		}
 	}
 }

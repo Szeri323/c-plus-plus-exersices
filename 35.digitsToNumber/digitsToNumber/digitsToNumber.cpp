@@ -1,6 +1,6 @@
 #include "../../../headers/std_lib_facilities.h"
 
-vector<char> populate_vector(vector<char> number) {
+vector<char> populate_vector(vector<char>& number) {
 	while (number.size() < 4) {
 		char ch;
 		cin >> ch;
@@ -20,7 +20,7 @@ vector<char> populate_vector(vector<char> number) {
 	return number;
 }
 
-int decomposition(vector<char> number) {
+int decomposition(const vector<char>& number) {
 	int val = 0;
 	int factor = 1;
 	for (int i = number.size() - 1; i >= 0; --i) {
