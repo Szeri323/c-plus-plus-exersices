@@ -2,7 +2,7 @@
 
 class Point {
 public:
-	Point();
+	Point(): x(0), y(0) {}
 	friend bool operator==(Point p1, Point p2);
 	friend ifstream& operator>>(ifstream& ist, Point& p);
 	void set(int x, int y) {
@@ -19,8 +19,6 @@ private:
 	int x;
 	int y;
 };
-
-Point::Point() : x(0), y(0) {}
 
 bool operator==(Point p1, Point p2) {
 	return (p1.get_x() == p2.get_x() || p1.get_y() == p2.get_y());
@@ -53,7 +51,7 @@ vector<Point> reading_from_file() {
 	return points;
 }
 
-void writing_to_file(vector<Point> points) {
+void writing_to_file(const vector<Point>& points) {
 	//cout << "Pass the output file name: ";
 	string oname = "points.txt";
 	//cin >> oname;
@@ -76,7 +74,7 @@ vector<Point> create_vector_from_user_points() {
 	return original_points;
 }
 
-void compare_vectors(vector<Point> vp1, vector<Point> vp2) {
+void compare_vectors(const vector<Point>& vp1, const vector<Point>& vp2) {
 	for (int i = 0; i < vp1.size(); ++i) {
 		if (!(vp1[i] == vp2[i])) {
 			cout << "Something went worong!" << endl;
@@ -86,7 +84,7 @@ void compare_vectors(vector<Point> vp1, vector<Point> vp2) {
 	cout << "Vetors are identical." << endl;
 }
 
-void print_vector(vector<Point> vp, string name) {
+void print_vector(const vector<Point>& vp, const string& name) {
 	cout << name <<":" << endl;
 	cout << "Number of elements: " << vp.size() << endl;
 	for (Point p : vp)
