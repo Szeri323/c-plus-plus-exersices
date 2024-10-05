@@ -5,13 +5,13 @@ int main() {
 	
 	cout << "\n\n--- Chapter 3 - Objects, Types and Values --- \n\n";
 
-	cout << "// - One line comment.\n";
-	cout << "<< - Stream direction sign.\n";
+	cout << "// - one line comment.\n";
+	cout << "<< - output stream direction operator.\n";
 	cout << "library - it is set of statments for reuse.\n";
-	cout << "Compilation Error - it is error that occures when program is compiled.\n";
-	cout << "C++ - C based high level language, created by Bjarne Stroustrup in 1985.\n";
-	cout << "cout - shorten of stream control output.\n";
-	cout << "output data - data that goes from the program.\n";
+	cout << "Compilation Error - is an error that can occur at the compliation stage. When the source code is translated into object code, it must meet certain some requirements, such as constexpr must be defined by a literal, which means constexpr must be known before compilation.\n";
+	cout << "C++ - superset of C, based on simula, high-level language, created by Bjarne Stroustrup in 1985.\n";
+	cout << "cout - shorten of stream control output. This statement is instance of ostream class.\n";
+	cout << "output data - data exiting the program.\n";
 	cout << "function - it is statment for computer. It contains type, function name, parameters and definition.\n";
 	cout << "IDE - interactive or integrated developement envirement. It contains all nessecary tools for developer to produce a program.\n";
 	cout << "#include - it is derective that informs copiler which header files add and where it can find them.\n";
@@ -82,22 +82,22 @@ int main() {
 
 	cout << "\n\n--- Chapter 6 - Writing a program ---\n\n";
 	
-	cout << "analysis - It is process befor designing project, where came up to collect\n";
+	cout << "analysis - is universal process that can be performed at all stages of software life. It is the observation of data or behavior and its comparison with our assumptions.\n";
 	cout << "parser (syntax analizer) - \n";
-	cout << "class - \n";
-	cout << "dividing by zero - \n";
-	cout << "member function - \n";
+	cout << "class - is a structure that contains constructor and destructor (or many of them), fields and methods. Class can have access specifiers such as public, protected or private. It helps to structure and manage the data.\n";
+	cout << "dividing by zero - is an unforgivable mistake that needs to be handle in any better program.\n";
+	cout << "member function - is another name for class method. It is function that is defined in body of the class.\n";
 	cout << "grammar - \n";
 	cout << "implementation - \n";
 	cout << "interface - \n";
 	cout << "parser - \n";
-	cout << "private - \n";
+	cout << "private - one of three access modifiers. Makes members of a class accessible only for other mebers of the same class.\n";
 	cout << "project - \n";
 	cout << "prototype - \n";
 	cout << "use case - \n";
 	cout << "pseudocode - \n";
 	cout << "public - \n";
-	cout << "class member - \n";
+	cout << "class member - is an entity that belongs to a class.\n";
 	cout << "token - \n";
 	cout << "class data member - \n";
 
