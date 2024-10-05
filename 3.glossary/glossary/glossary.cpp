@@ -24,7 +24,7 @@ int main() {
 	cout << "main() - is a fragment of function definition.\n";
 	cout << "header - contains definitions and sets of functions.\n";
 	cout << "program - is set of instructions what computer has to do and how it can do it.\n";
-	cout << "executible - last stage of production. It is finished, compiled and linked file, that we can run on our computer.\n";
+	cout << "executible - last stage of production. It is finished sorce code, compiled (translated to object code) and linked (all necesery object files connected in one executible file), that we can run on our computer.\n";
 	
 	cout << "\n\n--- Chapter 4 - Performing calculations ---\n\n";
 
@@ -75,10 +75,10 @@ int main() {
 	cout << "constant - it is literal or value that does not change during execution the program.\n";
 	cout << "testing - Checks whether a program or instruction behaves according to our assumptions.\n";
 	cout << "throw - a statement that stops program execution and tries to find the nearest catch blok to pass on an error with additional information, if one has been defined.\n";
-	cout << "pre-condition - \n";
-	cout << "post-condition - \n";
-	cout << "exception - \n";
-	cout << "requirement - it is set of expectations that need to be fullfild to sucessfully run program or instruction.\n";
+	cout << "pre-condition - the function test its arguments before executing the statement.\n";
+	cout << "post-condition - a test placed after a function statement to ensure that return value is correct and meets the assumptions.\n";
+	cout << "exception - this is a general type of error that we can catch and handle.\n";
+	cout << "requirement - this is a expectation that need to be fullfild to sucessfully run program or statement.\n";
 
 	cout << "\n\n--- Chapter 6 - Writing a program ---\n\n";
 	
