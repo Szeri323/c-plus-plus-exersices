@@ -83,36 +83,36 @@ int main() {
 	cout << "\n\n--- Chapter 6 - Writing a program ---\n\n";
 	
 	cout << "analysis - is universal process that can be performed at all stages of software life. It is the observation of data or behavior and its comparison with our assumptions.\n";
-	cout << "parser (syntax analizer) - \n";
+	cout << "syntax analizer (parser) - (@@@@@CHECK THIS DEFINITION@@@@@) is a program that takes some input and divide it using grammar. \n";
 	cout << "class - is a structure that contains constructor and destructor (or many of them), fields and methods. Class can have access specifiers such as public, protected or private. It helps to structure and manage the data.\n";
 	cout << "dividing by zero - is an unforgivable mistake that needs to be handle in any better program.\n";
 	cout << "member function - is another name for class method. It is function that is defined in body of the class.\n";
-	cout << "grammar - \n";
+	cout << "grammar - (@@@@@CHECK THIS DEFINITION@@@@@) set of rules defining much complex structures.\n";
 	cout << "implementation - \n";
-	cout << "interface - \n";
+	cout << "interface - (@@@@@CHECK THIS DEFINITION@@@@@) is a way that define comunication or way of usage between programs or theirs components.\n";
 	cout << "parser - \n";
 	cout << "private - one of three access modifiers. Makes members of a class accessible only for other mebers of the same class.\n";
-	cout << "project - \n";
-	cout << "prototype - \n";
-	cout << "use case - \n";
-	cout << "pseudocode - \n";
-	cout << "public - \n";
-	cout << "class member - is an entity that belongs to a class.\n";
-	cout << "token - \n";
-	cout << "class data member - \n";
+	cout << "project - (@@@@@CHECK THIS DEFINITION@@@@@)set of rules and tools that help write, compile and link code in more effective way.\n";
+	cout << "prototype - (@@@@@CHECK THIS DEFINITION@@@@@)first and very simple version of project or source code. It's goal is to present main concept and verify if our understanding of problem cover client needs or if our assumptions are right.\n";
+	cout << "use case - (@@@@@CHECK THIS DEFINITION@@@@@)is single way of usage our program that can \n";
+	cout << "pseudocode - (@@@@@CHECK THIS DEFINITION@@@@@)it is simplified way of presentation our thoughs that contains both code and human interpretation elements. Desciptions of algorytms are presened by pseudo code.\n";
+	cout << "public - (@@@@@CHECK THIS DEFINITION@@@@@)one of three class access specifiers.\n";
+	cout << "class member - (@@@@@CHECK THIS DEFINITION@@@@@)is an entity that belongs to a class.\n";
+	cout << "token - (@@@@@CHECK THIS DEFINITION@@@@@)small peace of data that can be taken from input stream and interpreted.\n";
+	cout << "class data member - another name of field of class. It is variable inside of a class.\n";
 
 	cout << "\n\n--- Chapter 7 - Finishing a program ---\n\n";
 	
-	cout << "version history - \n";
-	cout << "commenting - \n";
+	cout << "version history - list of changes (when and what was changed) in project.\n";
+	cout << "commenting - Using // sign for pass some additional informations or conclusions, pass some our assmptions of program work or quick way to temporary disable some code.\n";
 	cout << "fuctions multiplication - \n";
-	cout << "errors handling - \n";
-	cout << "recovery - \n";
+	cout << "errors handling - tring executing part of code and been ready to handle an error when occur. It is done by try, catch statements.\n";
+	cout << "recovery - bringing back the program to a previous working state.\n";
 	cout << "symbolic constant - \n";
 	cout << "backbone - small pice of source code, that need to work and simply make job well. Writen in first stage of coding or for prototyping.\n";
 	cout << "testing - \n";
-	cout << "code aligment - \n";
-	cout << "code maintenance - \n";
+	cout << "code aligment - way of using whitespaces (spaces or tabs) to improve clearity of code. It helps in better code organizations and makes finding bugs easier.\n";
+	cout << "code maintenance - making our code better. We can make it by keeping our code, clear, organized, universal and simplied.\n";
 
 	cout << "\n\n--- Chapter 8 - Technical ditails - fuctions, references and namespaces ---\n\n";
 
