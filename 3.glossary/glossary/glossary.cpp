@@ -61,24 +61,24 @@ int main() {
 
 	cout << "\n\n--- Chapter 5 - Errors ---\n\n";
 
-	cout << "assertion - we checking if the value passed by us, is the same value that program will return. \n";
-	cout << "error - it is a situation in our program when something went differently than expected.\n";
-	cout << "runtime error - this type of error occurs at the same top when program is compiled, linked and while programm is ranning (in execution stage).\n";
-	cout << "compilation error - this type of error occures when source code is translated on a objective code.\n";
-	cout << "consolidation error - can occur when the linker tries to find object files to link them into the executable program, but cannot find some of them.\n";
-	cout << "sytax error - occurs when the code does not follo the rules of the langage, e.g. typos, non-existent type names.\n";
-	cout << "type error - occurs when variable or function has no type or the type of a declared function is incompatible with the type when the function is called. When number of parameters or their type is incompatible with the declaration.\n";
-	cout << "range error - occur when we try to call a function or refer to a variable that does not exist in current scope. A common occurrence of this type is when we try to refer to a counter that we declared and defined inside a for loop.\n";
-	cout << "argument error - (@@@@@CHECK THIS DEFINITION@@@@@)error function can take string argument that can describe what heppened.\n";
-	cout << "catch - (@@@@@CHECK THIS DEFINITION@@@@@) instruction that is chained with instruction try. If in try block will occur any error, catch will handle this situation. We can print what happend, or clean up mess and bring the program to usage.\n";
-	cout << "debug - Process of running code and execution instructions one after another in specific mode with additional monitoring.\n";
-	cout << "constant - it is literal or value that does not change during execution the program.\n";
-	cout << "testing - Checks whether a program or instruction behaves according to our assumptions.\n";
-	cout << "throw - a statement that stops program execution and tries to find the nearest catch blok to pass on an error with additional information, if one has been defined.\n";
-	cout << "pre-condition - the function test its arguments before executing the statement.\n";
+	cout << "assertion - we check if the value passed by us is the same as the value returned by the program.\n";
+	cout << "error - a situation in our program when something goes differently than expected.\n";
+	cout << "runtime error - this type of error occurs when the program is compiled, linked and ranning (during the execution stage).\n";
+	cout << "compilation error - this type of error occures when source code is translated in to object code.\n";
+	cout << "linker (consolidation) error - occurs when the linker tries to find object files to link into the executable program but cannot find some of them.\n";
+	cout << "sytax error - occurs when the code does not follow the rules of the langage, e.g. typos or non-existent type names.\n";
+	cout << "type error - occurs when a variable or function has no type, or the type of a declared function is incompatible with the type when the function is called. It also occurs when the number of parameters or their types are incompatible with the function declaration.\n";
+	cout << "scope (range) error - occurs when we try to refer to a variable or function that does not exist in the current scope. A common occurrence is when, in another part of the program, we try to refer to a counter that was mistakenly defined inside a for loop.\n";
+	cout << "argument error - in C++, predefined exceptions are used for error handling. We can careat our own exception taht takes a string argument to describe the error.\n";
+	cout << "catch - an instruction associated with the try instruction. If any error (exception) occurs in the try block, catch will handle the situation. We can print what happened, clean up the mess and bring the program back to normal state.\n";
+	cout << "debug - the process of running code and executing instructions one after another in a specific mode with additional monitoring.\n";
+	cout << "constant - a literal or value that does not change during the execution of the program.\n";
+	cout << "testing - checks whether a program or instruction behaves according to our assumptions.\n";
+	cout << "throw - a statement that stops program execution and tries looks for the nearest catch block to pass on the error with additional information, if defined.\n";
+	cout << "pre-condition - a function test its arguments before executing the statement.\n";
 	cout << "post-condition - a test placed after a function statement to ensure that return value is correct and meets the assumptions.\n";
-	cout << "exception - this is a general type of error that we can catch and handle.\n";
-	cout << "requirement - this is a expectation that need to be fullfild to sucessfully run program or statement.\n";
+	cout << "exception - a general type of error that we can catch and handle.\n";
+	cout << "requirement - an expectation that needs to be fulfilled for the program or statement to run successfully.\n";
 
 	cout << "\n\n--- Chapter 6 - Writing a program ---\n\n";
 	
