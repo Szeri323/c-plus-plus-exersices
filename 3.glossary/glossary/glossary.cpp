@@ -7,23 +7,23 @@ int main() {
 
 	cout << "// - one line comment.\n";
 	cout << "<< - output stream direction operator.\n";
-	cout << "library - it is set of statments for reuse.\n";
+	cout << "library - set of statments for reuse.\n";
 	cout << "Compilation Error - is an error that can occur at the compliation stage. When the source code is translated into object code, it must meet certain some requirements, such as constexpr must be defined by a literal, which means constexpr must be known before compilation.\n";
 	cout << "C++ - superset of C, based on simula, high-level language, created by Bjarne Stroustrup in 1985.\n";
 	cout << "cout - shorten of stream control output. This statement is instance of ostream class.\n";
 	cout << "output data - data exiting the program.\n";
-	cout << "function - it is statment for computer. It contains type, function name, parameters and definition.\n";
+	cout << "function - a statment for computer. It contains type, function name, parameters and definition.\n";
 	cout << "IDE - interactive or integrated developement envirement. It contains all nessecary tools for developer to produce a program.\n";
-	cout << "#include - it is derective that informs copiler which header files add and where it can find them.\n";
+	cout << "#include - a derective that informs copiler which header files add and where it can find them.\n";
 	cout << "instruction/stetment - single command for computer.\n";
-	cout << "Object code - it is code generated from source code. It is hard to understand for humans but easy to understand for computers. It doesn't contain comments.\n";
-	cout << "Source code - it contains sets of instructions like functions writen in way that is understable for humans and can contain comments. From this type of code compiler create object code.\n";
-	cout << "comment - is a string that is ignored by compiler. One line comment start with // and multilines comment starts with /* and ends with */\n";
-	cout << "compilator - is an program that compiles source code to object code. In other words it takes files that ends with .cpp, .h and transle them to low level machine code without comments.\n";
-	cout << "linker - is a program that takes object codes and link them togeter in one executible program.\n";
-	cout << "main() - is a fragment of function definition.\n";
+	cout << "Object code - a code generated from source code. It is hard to understand for humans but easy to understand for computers. It doesn't contain comments.\n";
+	cout << "Source code - contains sets of instructions like functions writen in way that is understable for humans and can contain comments. From this type of code compiler create object code.\n";
+	cout << "comment - a string that is ignored by compiler. One line comment start with // and multilines comment starts with /* and ends with */\n";
+	cout << "compilator - a program that compiles source code to object code. In other words it takes files that ends with .cpp, .h and transle them to low level machine code without comments.\n";
+	cout << "linker - a program that takes object codes and link them togeter in one executible program.\n";
+	cout << "main() - a fragment of function definition.\n";
 	cout << "header - contains definitions and sets of functions.\n";
-	cout << "program - is set of instructions what computer has to do and how it can do it.\n";
+	cout << "program - set of instructions what computer has to do and how it can do it.\n";
 	cout << "executible - last stage of production. It is finished sorce code, compiled (translated to object code) and linked (all necesery object files connected in one executible file), that we can run on our computer.\n";
 	
 	cout << "\n\n--- Chapter 4 - Performing calculations ---\n\n";
