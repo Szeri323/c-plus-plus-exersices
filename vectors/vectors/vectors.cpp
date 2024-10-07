@@ -39,7 +39,7 @@ int main() {
 	/*vector<int> v;
 	fibonacci(1, 2, v, 100);
 	print("somevector", v);*/
-	vector<int> v1{ 1,3,5,7,9 };
+	/*vector<int> v1{ 1,3,5,7,9 };
 	vector<int> v2 = swap1(v1);
 	print("test", v2);
 	swap2(v1);
@@ -49,6 +49,37 @@ int main() {
 	swap2(strings);
 	cout << endl;
 	print("test", strings2);
-	print("test", strings);
-
+	print("test", strings);*/
+	vector<string> name;
+	vector<double> age;
+	string n;
+	int a;
+	cout << "pass five names";
+	while(cin) {
+		cin >> n;
+		if (n == "\\")break;
+		name.push_back(n);
+	}
+	cout << "pass age of those persons";
+	while (cin) {
+		cin >> a;
+		if (!cin) break;
+		age.push_back(a);
+	}
+	if (name.size() != age.size()) {
+		error("Sizes must be equal.");
+	}
+	for (int i = 0; i <  name.size(); ++i) {
+		cout << name[i] << " " << age[i] << endl;
+	}
+	vector<string> names = name;
+	sort(name.begin(), name.end());
+	for (int i = 0; i < name.size(); ++i) {
+		cout << name[i] << " ";
+		for (int j = 0; j < names.size(); ++j) {
+			if (name[i] == names[j]) {
+				cout << age[j] << " " << endl;
+			}
+		}
+	}
 }
