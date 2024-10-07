@@ -70,15 +70,17 @@ Data come from cin stream, go through ts name Token_stream.
 
 // Testing from the file section
 
-void read_from_test_file() {
+ifstream read_from_test_file() {
     string iname = "test_file.txt";
     ifstream ist{ iname };
     if (!ist) error("Could not open the test file.");
+    return ist;
 }
-void write_to_log_file() {
+ofstream write_to_log_file() {
     string oname = "logs.txt";
     ofstream ost{ oname };
     if (!ost) error("Could not open the logs file.");
+    return ost;
 }
 
 const char number = '8';
@@ -116,16 +118,16 @@ public:
 class Token_stream {
 // It is buffer for Tokens
 public:
-    Token_stream();
+    Token_stream(istream& ist) : ip(ist), full(false), buffer(0) { }
     Token get();
     void putback(Token t);
     void ignore(char c);
 private:
+    istream& ip;
     bool full;
     Token buffer;
 };
 
-Token_stream::Token_stream() :full(false), buffer(0) {}
 
 Token Token_stream::get() {
     // Reads chars from input stream and creates tokens
@@ -135,9 +137,12 @@ Token Token_stream::get() {
     }
 
     char ch;
-    cin.get(ch); // Atention: >> skips whitespaces (spaces, new lines, tabulators etc.)
+    ip.get(ch); // Atention: >> skips whitespaces (spaces, new lines, tabulators etc.)
+    if (ip.eof()) {
+        return Token(print);
+    }
     while (ch == ' ')
-        cin.get(ch);
+        ip.get(ch);
     switch (ch)
     {
     case print:
@@ -152,9 +157,9 @@ Token Token_stream::get() {
     case '0': case '1': case '2': case '3': case '4':
     case '5': case '6': case '7': case '8': case '9':
     {
-        cin.putback(ch);
+        ip.putback(ch);
         double val;
-        cin >> val;
+        ip >> val;
         return Token(number, val);
     }
     case '\n':
@@ -173,9 +178,9 @@ Token Token_stream::get() {
         if (isalpha(ch)) {
             string s;
             s += ch;
-            while (cin.get(ch) && (isalpha(ch) || isdigit(ch) || ch == '_'))
+            while (ip.get(ch) && (isalpha(ch) || isdigit(ch) || ch == '_'))
                 s += ch;
-            cin.putback(ch);
+            ip.putback(ch);
             if (s == varkey) return Token(let);
             if (s == constkey) return Token(constant);
             if (s == sqrtkey) return Token(sqrtsign);
@@ -202,7 +207,7 @@ void Token_stream::ignore(char c) {
     }
     full = false;
     char ch = 0;
-    while (cin >> ch)
+    while (ip >> ch)
         if (ch == c) return;
 }
 
@@ -266,19 +271,19 @@ int factorial(int factor) {
     return factor * factorial(factor - 1);
 }
 
-Token_stream ts;
+
 
 Symbol_table symtab;
 
-double statement();
+double statement(Token_stream& ts);
 
-double declaration();
+double declaration(Token_stream& ts);
 
-double expression();
+double expression(Token_stream& ts);
 
-double term();
+double term(Token_stream& ts);
 
-double primary();
+double primary(Token_stream& ts);
 
 void print_instruction() {
     cout << "Welcome in our simple calculator."
@@ -316,11 +321,12 @@ void print_help() {
     return;
 }
 
-void clean_up_mess() {
+void clean_up_mess(Token_stream& ts) {
     ts.ignore(print);
 }
 
-void calculate() {
+void calculate(istream& input, ostream& output) {
+    Token_stream ts(input);
     while (cin) 
         try {
             cout << prompt;
@@ -341,11 +347,11 @@ void calculate() {
                 
             if (t.kind == quit) return;
             ts.putback(t);
-            cout << result << statement() << endl;
+            output << result << statement(ts) << endl;
         }
     catch (exception& e) {
-        cerr << e.what() << endl;
-        clean_up_mess();
+        output << e.what() << endl;
+        clean_up_mess(ts);
     }
 }
 
@@ -372,7 +378,16 @@ try {
     symtab.define("e", 2.7182818284, true);
     symtab.define("k", 1000, true);*/
     print_instruction();
-    calculate();
+    cout << "Do you want use test file yes (1), no (0)?";
+    bool anwser;
+    cin >> anwser;
+    if (anwser) {
+        ifstream input = read_from_test_file();
+        ofstream output = write_to_log_file();
+        calculate(input, output);
+    }
+    else
+        calculate(cin, cout);
     keep_window_open();
     return 0;
 }
@@ -387,25 +402,25 @@ catch (...) {
     return 2;
 }
 
-double statement() {
+double statement(Token_stream& ts) {
     Token t = ts.get();
     switch (t.kind) {
     case constant:
     case let:
         ts.putback(t);
-        return declaration();
+        return declaration(ts);
     case name:
     {
         ts.putback(t);
-        return expression();
+        return expression(ts);
     }
     default:
         ts.putback(t);
-        return expression();
+        return expression(ts);
     }
 }
 
-double declaration() {
+double declaration(Token_stream& ts) {
     Token t = ts.get();
 
     Token t2 = ts.get();
@@ -414,23 +429,23 @@ double declaration() {
 
     Token t3 = ts.get();
     if (t3.kind != '=') error("Missing = sign in variable declaration.", var_name);
-    double d = expression();
+    double d = expression(ts);
     (t.kind == let) ? symtab.define(var_name, d, false) : symtab.define(var_name, d, true); // check if constant or not
     return d;
 }
 
-double expression() {
-    double left = term();
+double expression(Token_stream& ts) {
+    double left = term(ts);
     Token t = ts.get();
 
     while (true) {
         switch (t.kind) {
         case '+':
-            left += term();
+            left += term(ts);
             t = ts.get();
             break;
         case '-':
-            left -= term();
+            left -= term(ts);
             t = ts.get();
             break;
         default:
@@ -440,15 +455,15 @@ double expression() {
     }
 }
 
-double term() {
-    double left = primary();
+double term(Token_stream& ts) {
+    double left = primary(ts);
     Token t = ts.get();
 
     while (true) {
         switch (t.kind) {
         case '%':
         {
-            double d = primary();
+            double d = primary(ts);
             if (d == 0) error("Dividing by 0.");
             left = fmod(left, d);
             t = ts.get();
@@ -467,12 +482,12 @@ double term() {
             break;
         }
         case '*':
-            left *= primary();
+            left *= primary(ts);
             t = ts.get();
             break;
         case '/':
         {
-            double d = primary();
+            double d = primary(ts);
             if (d == 0) error("Dividing by zero.");
             left /= d;
             t = ts.get();
@@ -485,19 +500,19 @@ double term() {
     }
 }
 
-double primary() {
+double primary(Token_stream& ts) {
     Token t = ts.get();
     switch (t.kind) {
     case '{':
     {
-        double d = expression();
+        double d = expression(ts);
         t = ts.get();
         if (t.kind != '}') error("'}' was expected.");
         return d;
     }
     case '(':
     {
-        double d = expression();
+        double d = expression(ts);
         t = ts.get();
         if (t.kind != ')') error("')' was expected.");
         return d;
@@ -514,7 +529,7 @@ double primary() {
         if (symtab.is_declared(t.name)) {
             Token t2 = ts.get();
             if (t2.kind == '=') {
-                double d = expression();
+                double d = expression(ts);
                 symtab.set(t.name, d);
                 return symtab.get(t.name);
             }
@@ -525,13 +540,13 @@ double primary() {
         }
         error("Name is not declared.");
     case '-':
-        return -primary();
+        return -primary(ts);
     case '+':
-        return primary();
+        return primary(ts);
     case sqrtsign:
     {
         // allows to use expression like sqrt(3*3) or sqrt(2.5) and use sqrt from std lib to return result
-        double d = primary();
+        double d = primary(ts);
         if (d < 1) error("Sqrt only from positive numebrs.");
         return sqrt(d);
     }
@@ -541,12 +556,12 @@ double primary() {
         Token t = ts.get();
         if (t.kind != '(') error("Invalid pow operation. Missing ( sign.");
 
-        double x = primary();
+        double x = primary(ts);
 
         Token t2 = ts.get();
         if (t2.kind != ',') error("Invalid pow operation. Missing , sign.");
 
-        int i = narrow_cast<int>(primary());
+        int i = narrow_cast<int>(primary(ts));
 
         Token t3 = ts.get();
         if (t3.kind != ')') error("Invalid pow operation. Missing ) sign.");

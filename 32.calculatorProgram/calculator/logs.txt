@@ -1,5 +1,14 @@
+= -3
+= 1
 = 3
 = 0
 = 123
-= 3
-Primary was expected.
+= 0
+= 0
+= 0
+= 0
+Dividing by zero.
+Dividing by zero.
+= -9.99999e+14
+= 9.99999e+14
+Name is not declared.
