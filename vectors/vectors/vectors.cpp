@@ -1,6 +1,28 @@
 #include "../../../headers/std_lib_facilities.h"
 
 template<typename T>
+vector<T> populate_vector(vector<T>& v) {
+	T temp;
+	while (cin) {
+		cin >> temp;
+		if (!cin) {
+			cin.clear();
+			cin.ignore();
+			break;
+		}
+		if (typeid(T) == typeid(string)) {
+			/*if constexpr (is_same<T, string>::value) {*/
+			if (to_string(temp) == "\\") {
+				break;
+				/*}*/
+			}
+		}
+		v.push_back(temp);
+	}
+	return v;
+}
+
+template<typename T>
 void print(const string& vector_name, const vector<T>& v) {
 	cout << vector_name << ": ";
 	for (T x : v) {
@@ -35,6 +57,32 @@ void swap2(vector<T>& v) {
 	}
 }
 
+void sort_and_order_vectors(vector<string> name, vector<double> age) {
+	// Function create copy of name vector then sort names in original one then try to assing ages to the sorted vector based on referenc copy
+	for (int i = 0; i < name.size(); ++i) {
+		cout << name[i] << " " << age[i] << endl;
+	}
+	vector<string> names = name;
+	sort(name.begin(), name.end());
+	for (int i = 0; i < name.size(); ++i) {
+		cout << name[i] << " ";
+		for (int j = 0; j < names.size(); ++j) {
+			if (name[i] == names[j]) {
+				cout << age[j] << " " << endl;
+			}
+		}
+	}
+}
+
+double calculate_index(vector<double>& price, vector<double>& weight) {
+	if (price.size() != weight.size()) error("Vectors sizes are not equal.");
+	double index = 0;
+	for (int i = 0; i < price.size(); ++i) {
+		index += price[i] * weight[i];
+	}
+	return index;
+}
+
 int main() {
 	/*vector<int> v;
 	fibonacci(1, 2, v, 100);
@@ -50,36 +98,28 @@ int main() {
 	cout << endl;
 	print("test", strings2);
 	print("test", strings);*/
-	vector<string> name;
+	/*vector<string> name;
 	vector<double> age;
 	string n;
 	int a;
 	cout << "pass five names";
-	while(cin) {
-		cin >> n;
-		if (n == "\\")break;
-		name.push_back(n);
+	try {
+		name = populate_vector(name);
+	}
+	catch (exception& e) {
+		cout << e.what() << endl;
 	}
 	cout << "pass age of those persons";
-	while (cin) {
-		cin >> a;
-		if (!cin) break;
-		age.push_back(a);
-	}
+	age = populate_vector(age);
 	if (name.size() != age.size()) {
 		error("Sizes must be equal.");
 	}
-	for (int i = 0; i <  name.size(); ++i) {
-		cout << name[i] << " " << age[i] << endl;
-	}
-	vector<string> names = name;
-	sort(name.begin(), name.end());
-	for (int i = 0; i < name.size(); ++i) {
-		cout << name[i] << " ";
-		for (int j = 0; j < names.size(); ++j) {
-			if (name[i] == names[j]) {
-				cout << age[j] << " " << endl;
-			}
-		}
-	}
+	sort_and_order_vectors(name, age);*/
+	vector<double> price;
+	vector<double> weight;
+	cout << "prices: " << endl;
+	price = populate_vector(price);
+	cout << "weights: " << endl;
+	weight = populate_vector(weight);
+	cout << calculate_index(price, weight) << endl;
 }
