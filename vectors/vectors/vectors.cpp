@@ -52,12 +52,30 @@ vector<double> populate_vector(vector<double>& v) {
 	return v;
 }
 
+int minv(const vector<int>& v) {
+	int min = 0;
+	bool is_first = 1;
+	for (int x : v) {
+		if (is_first) {
+			min = x;
+			is_first = 0;
+		}
+		else {
+			if (x < min) {
+				min = x;
+			}
+		}
+	}
+	return min;
+}
+
 int maxv(const vector<int>& v) {
 	int max = 0;
 	bool is_first = 1;
 	for (int x : v) {
 		if (is_first) {
 			max = x;
+			is_first = 0;
 		}
 		else {
 			if (x > max) {
@@ -66,6 +84,24 @@ int maxv(const vector<int>& v) {
 		}
 	}
 	return max;
+}
+
+double calculate_median(vector<int> v) {
+	sort(v.begin(), v.end());
+	if (v.size() % 2 == 0) {
+		return (v[v.size() / 2] + v[v.size() / 2 - 1]) / 2;
+	}
+	else {
+		return v[v.size() / 2];
+	}
+}
+
+double calculate_average(const vector<int>& v) {
+	int sum = 0;
+	for (int x : v) {
+		sum += x;
+	}
+	return sum / v.size();
 }
 
 template<typename T>
@@ -129,6 +165,29 @@ double calculate_index(vector<double>& price, vector<double>& weight) {
 	return index;
 }
 
+struct Vector_data {
+	int minValue;
+	int maxValue;
+	double median;
+	double average;
+};
+
+Vector_data make_a_struct(const vector<int>& v) {
+	Vector_data vd;
+	vd.minValue = minv(v);
+	vd.maxValue = maxv(v);
+	vd.median = calculate_median(v);
+	vd.average = calculate_average(v);
+	return vd;
+}
+
+void pass_by_reference(const vector<int>& v, int& minValue, int& maxValue, double& median, double& average) {
+	minValue = minv(v);
+	maxValue = maxv(v);
+	median = calculate_median(v);
+	average = calculate_average(v);
+}
+
 int main() {
 	/*vector<int> v;
 	fibonacci(1, 2, v, 100);
@@ -168,7 +227,17 @@ int main() {
 	cout << "weights: " << endl;
 	weight = populate_vector(weight);
 	cout << calculate_index(price, weight) << endl;*/
-	vector<int> numbers{ 1,2,3,4,5,6,7,1,2,3,4,5,10090 };
-	cout << maxv(numbers) << endl;
+	/*vector<int> numbers{ 1,2,3,4,5,6,7,1,2,3,4,5,10090 };
+	cout << maxv(numbers) << endl;*/
+	vector<int> v = { 1,2,3,4,5 };
+	int minValue = 0;
+	int maxValue = 0;
+	double median = 0;
+	double average = 0;
+	Vector_data vd;
+	vd = make_a_struct(v);
+	cout << "Vector_data: " << vd.minValue << " " << vd.maxValue << " " << vd.median << " " << vd.average << endl;
+	pass_by_reference(v, minValue, maxValue, median, average);
+	cout << "referances: " << minValue << " " << maxValue << " " << median << " " << average << endl;
 
 }
