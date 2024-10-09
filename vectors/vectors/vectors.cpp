@@ -1,8 +1,29 @@
 #include "../../../headers/std_lib_facilities.h"
 
-template<typename T>
-vector<T> populate_vector(vector<T>& v) {
-	T temp;
+//template<typename T>
+//vector<T> populate_vector(vector<T>& v) {
+//	T temp;
+//	while (cin) {
+//		cin >> temp;
+//		if (!cin) {
+//			cin.clear();
+//			cin.ignore();
+//			break;
+//		}
+//		if (typeid(T) == typeid(string)) {
+//			/*if constexpr (is_same<T, string>::value) {*/
+//			if (to_string(temp) == "\\") {
+//				break;
+//				/*}*/
+//			}
+//		}
+//		v.push_back(temp);
+//	}
+//	return v;
+//}
+
+vector<string> populate_vector(vector<string>& v) {
+	string temp;
 	while (cin) {
 		cin >> temp;
 		if (!cin) {
@@ -10,16 +31,41 @@ vector<T> populate_vector(vector<T>& v) {
 			cin.ignore();
 			break;
 		}
-		if (typeid(T) == typeid(string)) {
-			/*if constexpr (is_same<T, string>::value) {*/
-			if (to_string(temp) == "\\") {
-				break;
-				/*}*/
-			}
+		if (temp == "\\") {
+			break;
 		}
 		v.push_back(temp);
 	}
 	return v;
+}
+vector<double> populate_vector(vector<double>& v) {
+	double temp;
+	while (cin) {
+		cin >> temp;
+		if (!cin) {
+			cin.clear();
+			cin.ignore();
+			break;
+		}
+		v.push_back(temp);
+	}
+	return v;
+}
+
+int maxv(const vector<int>& v) {
+	int max = 0;
+	bool is_first = 1;
+	for (int x : v) {
+		if (is_first) {
+			max = x;
+		}
+		else {
+			if (x > max) {
+				max = x;
+			}
+		}
+	}
+	return max;
 }
 
 template<typename T>
@@ -115,11 +161,14 @@ int main() {
 		error("Sizes must be equal.");
 	}
 	sort_and_order_vectors(name, age);*/
-	vector<double> price;
+	/*vector<double> price;
 	vector<double> weight;
 	cout << "prices: " << endl;
 	price = populate_vector(price);
 	cout << "weights: " << endl;
 	weight = populate_vector(weight);
-	cout << calculate_index(price, weight) << endl;
+	cout << calculate_index(price, weight) << endl;*/
+	vector<int> numbers{ 1,2,3,4,5,6,7,1,2,3,4,5,10090 };
+	cout << maxv(numbers) << endl;
+
 }
