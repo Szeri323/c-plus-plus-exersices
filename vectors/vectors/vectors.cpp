@@ -157,6 +157,7 @@ void sort_and_order_vectors(vector<string> name, vector<double> age) {
 }
 
 double calculate_index(vector<double>& price, vector<double>& weight) {
+	// func checks if vectors are equal and then calculate "index" of two vectors
 	if (price.size() != weight.size()) error("Vectors sizes are not equal.");
 	double index = 0;
 	for (int i = 0; i < price.size(); ++i) {
@@ -173,6 +174,7 @@ struct Vector_data {
 };
 
 Vector_data make_a_struct(const vector<int>& v) {
+	// makes and return a struct with vector atributes
 	Vector_data vd;
 	vd.minValue = minv(v);
 	vd.maxValue = maxv(v);
@@ -182,6 +184,7 @@ Vector_data make_a_struct(const vector<int>& v) {
 }
 
 void pass_by_reference(const vector<int>& v, int& minValue, int& maxValue, double& median, double& average) {
+	// function change referenced values
 	minValue = minv(v);
 	maxValue = maxv(v);
 	median = calculate_median(v);
@@ -189,10 +192,12 @@ void pass_by_reference(const vector<int>& v, int& minValue, int& maxValue, doubl
 }
 
 int count_chars_in_string(const string& s) {
+	// count letters in string
 	return s.size();
 }
 
 vector<int> analize_strings_in_vector(vector<string> v) {
+	// count and return letters in vectors strings, caclulate min and max value string and show first and last in lexicographical order.
 	int minValue = 0;
 	int maxValue = 0;
 	sort(v.begin(), v.end());
@@ -215,6 +220,11 @@ vector<int> analize_strings_in_vector(vector<string> v) {
 
 	return letters_counter;
 
+}
+
+void f(const int a) {
+	// check if we can declare a const nonreferential function argument and where we can use it
+	cout << a << endl;
 }
 
 int main() {
@@ -268,8 +278,9 @@ int main() {
 	cout << "Vector_data: " << vd.minValue << " " << vd.maxValue << " " << vd.median << " " << vd.average << endl;
 	pass_by_reference(v, minValue, maxValue, median, average);
 	cout << "referances: " << minValue << " " << maxValue << " " << median << " " << average << endl;*/
-	vector<string> v{ "a", "ab", "abc", "test" };
+	/*vector<string> v{ "a", "ab", "abc", "test" };
 	vector<int> v2 = analize_strings_in_vector(v);
-	print("ints: ",v2);
-
+	print("ints: ",v2);*/
+	int a = 5;
+	f(a);
 }
