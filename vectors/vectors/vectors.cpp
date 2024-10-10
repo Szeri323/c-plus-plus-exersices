@@ -188,6 +188,35 @@ void pass_by_reference(const vector<int>& v, int& minValue, int& maxValue, doubl
 	average = calculate_average(v);
 }
 
+int count_chars_in_string(const string& s) {
+	return s.size();
+}
+
+vector<int> analize_strings_in_vector(vector<string> v) {
+	int minValue = 0;
+	int maxValue = 0;
+	sort(v.begin(), v.end());
+	vector<int> letters_counter;
+	for (string s : v) {
+		letters_counter.push_back(count_chars_in_string(s));
+	}
+	minValue = minv(letters_counter);
+	maxValue = maxv(letters_counter);
+	for (int i = 0; i < letters_counter.size(); ++i) {
+		if (letters_counter[i] == minValue) {
+			cout << "Min value is: " << minValue << " and it a " << v[i] << endl;
+		}
+		if (letters_counter[i] == maxValue) {
+			cout << "Max value is: " << maxValue << " and it a " << v[i] << endl;
+		}
+	}
+	cout << "First string is " << v[0] << endl;
+	cout << "Last string is " << v[v.size()-1] << endl;
+
+	return letters_counter;
+
+}
+
 int main() {
 	/*vector<int> v;
 	fibonacci(1, 2, v, 100);
@@ -229,7 +258,7 @@ int main() {
 	cout << calculate_index(price, weight) << endl;*/
 	/*vector<int> numbers{ 1,2,3,4,5,6,7,1,2,3,4,5,10090 };
 	cout << maxv(numbers) << endl;*/
-	vector<int> v = { 1,2,3,4,5 };
+	/*vector<int> v = { 1,2,3,4,5 };
 	int minValue = 0;
 	int maxValue = 0;
 	double median = 0;
@@ -238,6 +267,9 @@ int main() {
 	vd = make_a_struct(v);
 	cout << "Vector_data: " << vd.minValue << " " << vd.maxValue << " " << vd.median << " " << vd.average << endl;
 	pass_by_reference(v, minValue, maxValue, median, average);
-	cout << "referances: " << minValue << " " << maxValue << " " << median << " " << average << endl;
+	cout << "referances: " << minValue << " " << maxValue << " " << median << " " << average << endl;*/
+	vector<string> v{ "a", "ab", "abc", "test" };
+	vector<int> v2 = analize_strings_in_vector(v);
+	print("ints: ",v2);
 
 }
