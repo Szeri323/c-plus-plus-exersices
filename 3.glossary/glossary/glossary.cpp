@@ -108,20 +108,20 @@ int main() {
 	cout << "fuctions multiplication - \n";
 	cout << "errors handling - tring executing part of code and been ready to handle an error when occur. It is done by try, catch statements.\n";
 	cout << "recovery - bringing back the program to a previous working state.\n";
-	cout << "symbolic constant - \n";
+	cout << "symbolic constant - It is a value that does not change during the execution of program.\n";
 	cout << "backbone - small pice of source code, that need to work and simply make job well. Writen in first stage of coding or for prototyping.\n";
-	cout << "testing - \n";
+	cout << "testing - using if statement to check if value is correct and meet conditions.\n";
 	cout << "code aligment - way of using whitespaces (spaces or tabs) to improve clearity of code. It helps in better code organizations and makes finding bugs easier.\n";
 	cout << "code maintenance - making our code better. We can make it by keeping our code, clear, organized, universal and simplied.\n";
 
 	cout << "\n\n--- Chapter 8 - Technical ditails - fuctions, references and namespaces ---\n\n";
 
-	cout << "argument - \n";
-	cout << "nesting block - \n";
-	cout << "const - \n";
-	cout << "constexpr - \n";
-	cout << "definition - \n";
-	cout << "definition of the funciton - \n";
+	cout << "argument - parameter passed to the function when it is called.\n";
+	cout << "nesting block - when we write code using curly bracket {} signs and then next code in them and so on. It becomes when we write loops in loops or condition and condition activated only if this previous is fulfiled.\n";
+	cout << "const - statemant that declare inmutable values in our program.\n";
+	cout << "constexpr - statement that be initialized on a compilation proces and can contain only literals.\n";
+	cout << "definition - content between curly brackets e. g. body of a function.\n";
+	cout << "definition of the funciton - are insctructions inside the function between curly brackets.\n";
 	cout << "declaration - \n";
 	cout << "using declaration - \n";
 	cout << "advance declaration - \n";
