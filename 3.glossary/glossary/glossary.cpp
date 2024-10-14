@@ -72,7 +72,8 @@ int main() {
 	cout << "argument error - in C++, predefined exceptions are used for error handling. We can careat our own exception taht takes a string argument to describe the error.\n";
 	cout << "catch - an instruction associated with the try instruction. If any error (exception) occurs in the try block, catch will handle the situation. We can print what happened, clean up the mess and bring the program back to normal state.\n";
 	cout << "debug - the process of running code and executing instructions one after another in a specific mode with additional monitoring.\n";
-	cout << "constant - a literal or value that does not change during the execution of the program.\n";
+	cout << "container - data collection like vector or array.\n";
+	cout << "invariant - intializer that allows defining only varaibles in specific way. It ensuers a value of variable always be correct.\n";
 	cout << "testing - checks whether a program or instruction behaves according to our assumptions.\n";
 	cout << "throw - a statement that stops program execution and tries looks for the nearest catch block to pass on the error with additional information, if defined.\n";
 	cout << "pre-condition - a function test its arguments before executing the statement.\n";
@@ -122,13 +123,13 @@ int main() {
 	cout << "constexpr - statement that be initialized on a compilation proces and can contain only literals.\n";
 	cout << "definition - content between curly brackets e. g. body of a function.\n";
 	cout << "definition of the funciton - are insctructions inside the function between curly brackets.\n";
-	cout << "declaration - \n";
-	cout << "using declaration - \n";
+	cout << "declaration - contains a type and name of variable or type name and paramiters of function without definition.\n";
+	cout << "using declaration - when we need use function which is defined under the caller function we can 'use definition' higher in our code. By using it we say we want use this function but we define it later in code.\n";
 	cout << "advance declaration - \n";
 	cout << "using directive - \n";
 	cout << "extern - \n";
 	cout << "function - \n";
-	cout << "initiator - \n";
+	cout << "initializer - \n";
 	cout << "namespace - \n";
 	cout << "undeclared identifier - \n";
 	cout << "header file - \n";
