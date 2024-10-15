@@ -84,7 +84,7 @@ int main() {
 	cout << "\n\n--- Chapter 6 - Writing a program ---\n\n";
 	
 	cout << "analysis - is universal process that can be performed at all stages of software life. It is the observation of data or behavior and its comparison with our assumptions.\n";
-	cout << "syntax analizer (parser) - (@@@@@CHECK THIS DEFINITION@@@@@) is a program that takes some input and divide it using grammar. \n";
+	cout << "syntax analizer (parser) - (@@@@@CHECK THIS DEFINITION@@@@@) is a program that takes some input and divide it using grammar.\n";
 	cout << "class - is a structure that contains constructor and destructor (or many of them), fields and methods. Class can have access specifiers such as public, protected or private. It helps to structure and manage the data.\n";
 	cout << "dividing by zero - is an unforgivable mistake that needs to be handle in any better program.\n";
 	cout << "member function - is another name for class method. It is function that is defined in body of the class.\n";
@@ -126,17 +126,17 @@ int main() {
 	cout << "declaration - contains a type and name of variable or type name and paramiters of function without definition.\n";
 	cout << "using declaration - when we need use function which is defined under the caller function we can 'use definition' higher in our code. By using it we say we want use this function but we define it later in code.\n";
 	cout << "advance declaration - \n";
-	cout << "using directive - \n";
+	cout << "using directive - is a special directive that says our compiler that names we use belongs to specific namespace. If we use it use can write cout insteed of std::cout.\n";
 	cout << "extern - \n";
 	cout << "function - \n";
-	cout << "initializer - \n";
-	cout << "namespace - \n";
+	cout << "initializer - we use it when we wont to initialize some variables or objects. To initialize variable be use type var_name{value} or type var_name = value, to initialize object we use constructor or defult constructor like Class_name::Constructor_name(): field_a(val_a), filed_b(val_b) {}. We initialize data to avoid using random data from not cleared memory, what is really dengerous.\n";
+	cout << "namespace - it helps avoid name colisions in our program. If we have function line() in our graphics library and mathematic library and we need both of them, we can use namespace_name:: prefix like graphics::line() or mathematic::line() to clarify which line function we want to use.\n";
 	cout << "undeclared identifier - \n";
-	cout << "header file - \n";
-	cout << "passing on arguments - \n";
-	cout << "passing by reference - \n";
-	cout << "passing by const reference - \n";
-	cout << "passing by value - \n";
+	cout << "header file - a file that contains function declarations(headers). It helps us reuse our code and keep it clean.\n";
+	cout << "passing on arguments - it is a section between parenthess in a function call. We send to the function we call data that we want to work on. By defualt in function we use arguments copy what is called passing by value. If we want work on real data not on copy we need to pass arguments by reference.\n";
+	cout << "passing by reference - It is used to work directly on a passing value. Reference is a address to memory that holds our data. It is a way faster because function does not make copy of values, and more dangarous because passed data are updated in a funcion. It is use for speed up process on a biger data structures like vectors, arrays, or strings.\n";
+	cout << "passing by const reference - It is a way to upgrade performence by passing reference but only for reading the information. Const statement blocks a possibility to edit the data.\n";
+	cout << "passing by value - It happens when we normaly call our function with parameters. Function makes copy of taken parameters and edit only this copy. It is more safe and used for small data like single number or chars.\n";
 	cout << "activation record - \n";
 	cout << "recursion - \n";
 	cout << "return - \n";
