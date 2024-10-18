@@ -135,7 +135,7 @@ int main() {
 	cout << "header file - a file that contains function declarations(headers). It helps us reuse our code and keep it clean.\n";
 	cout << "passing on arguments - it is a section between parenthess in a function call. We send to the function we call data that we want to work on. By defualt in function we use arguments copy what is called passing by value. If we want work on real data not on copy we need to pass arguments by reference.\n";
 	cout << "passing by reference - It is used to work directly on a passing value. Reference is a address to memory that holds our data. It is a way faster because function does not make copy of values, and more dangarous because passed data are updated in a funcion. It is use for speed up process on a biger data structures like vectors, arrays, or strings.\n";
-	cout << "passing by const reference - It is a way to upgrade performence by passing reference but only for reading the information. Const statement blocks a possibility to edit the data.\n";
+	cout << "passing by const reference - It is a way to upgrade performence by passing reference but only for reading the information. Const modifier blocks a possibility to edit the data.\n";
 	cout << "passing by value - It happens when we normaly call our function with parameters. Function makes copy of taken parameters and edit only this copy. It is more safe and used for small data like single number or chars.\n";
 	cout << "activation record - \n";
 	cout << "recursion - \n";
