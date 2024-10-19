@@ -18,5 +18,16 @@
     <ClCompile Include="dateClasses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dateStruct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dateStruct_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dateStruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
