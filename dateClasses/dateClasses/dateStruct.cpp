@@ -1,8 +1,4 @@
-struct Date {
-	int y;      // rok
-	int m;      // miesi¹c
-	int d;      // dzieñ
-};
+#include "dateStruct.h"
 
 void init_day(Date& dd, int y, int m, int d) {
 	if (y >= 0 && m > 0 && m < 13 && d>0 && d < 32) {

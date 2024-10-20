@@ -29,5 +29,8 @@
     <ClInclude Include="dateStruct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dateStruct_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

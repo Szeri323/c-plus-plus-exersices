@@ -1,5 +1,5 @@
+#include "dateStruct_test.h"
 #include "../../../headers/std_lib_facilities.h"
-#include "dateStruct_test.cpp"
 
 //class 
 
@@ -7,10 +7,6 @@
 
 //test for class leapyear, months only from 1-12 and days from 1-31
 //invalid sample of test data (2004,13,-5)
-
-
-
-
 
 int main() {
 	if (tests()) {
