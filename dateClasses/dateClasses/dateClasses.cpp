@@ -9,10 +9,13 @@
 //invalid sample of test data (2004,13,-5)
 
 int main() {
-	if (tests()) {
+	try
+	{
+		tests();
 		cout << "All good." << endl;
 	}
-	else {
-		cout << "Some of tests did not pass." << endl;
+	catch (const exception& e)
+	{
+		cout << e.what() << endl;
 	}
 }
