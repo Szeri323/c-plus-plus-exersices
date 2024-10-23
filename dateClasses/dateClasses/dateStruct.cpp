@@ -49,5 +49,11 @@ void add_day(Date& dd, int n) {
 			dd.m = 1;
 			++dd.y;
 		}
+		init_day(dd, dd.y, dd.m, dd.d);
 	}
+}
+
+ostream& operator<<(ostream& os, const Date& dd) {
+	os << "Year: " << dd.y << " Month: " << dd.m << " Day: " << dd.d << " Max days of month: " << dd.max_d << " Is Leapyear: " << dd.leapyear << endl;
+	return os;
 }

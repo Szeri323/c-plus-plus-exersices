@@ -1,4 +1,5 @@
 #include "./dateStruct/dateStruct_test.h"
+#include "./dateStruct/dateStruct.h"
 #include "../../../headers/std_lib_facilities.h"
 
 //class 
@@ -13,6 +14,12 @@ int main() {
 	{
 		tests();
 		cout << "All good." << endl;
+		Date today;
+		init_day(today, 2017, 01, 31);
+		Date tomorrow = today;
+		add_day(tomorrow, 1);
+		cout << today << endl;
+		cout << tomorrow << endl;
 	}
 	catch (const exception& e)
 	{
