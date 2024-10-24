@@ -127,11 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dateClass.cpp" />
     <ClCompile Include="dateClasses.cpp" />
+    <ClCompile Include="dateClass_test.cpp" />
     <ClCompile Include="dateStruct.cpp" />
     <ClCompile Include="dateStruct_test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dateClass.h" />
+    <ClInclude Include="dateClass_test.h" />
     <ClInclude Include="dateStruct.h" />
     <ClInclude Include="dateStruct_test.h" />
   </ItemGroup>

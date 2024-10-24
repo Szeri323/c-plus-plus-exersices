@@ -24,12 +24,24 @@
     <ClCompile Include="dateStruct_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dateClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dateClass_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dateStruct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dateStruct_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dateClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dateClass_test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

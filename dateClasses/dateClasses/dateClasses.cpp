@@ -1,5 +1,7 @@
-#include "./dateStruct/dateStruct_test.h"
 #include "./dateStruct/dateStruct.h"
+#include "./dateStruct/dateStruct_test.h"
+#include "./dateClass/dateClass.h"
+#include "./dateClass/dateClass_test.h"
 #include "../../../headers/std_lib_facilities.h"
 
 //class 
