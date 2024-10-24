@@ -1,7 +1,8 @@
 #include "../../../headers/std_lib_facilities.h"
 #pragma once
 
-// cons - It allwos to use object before initialization.
+// cons - It allwos to use object before initialization - solved
+// cons - leave filed of the struct public
 
 struct Date {
 	int y;      // year
