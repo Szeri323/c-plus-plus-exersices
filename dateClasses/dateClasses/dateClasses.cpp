@@ -14,10 +14,9 @@ int main() {
 	{
 		tests();
 		cout << "All good." << endl;
-		Date today;
-		init_day(today, 2017, 01, 31);
+		Date today(2017, 01, 31);
 		Date tomorrow = today;
-		add_day(tomorrow, 1);
+		tomorrow.add_day(1);
 		cout << today << endl;
 		cout << tomorrow << endl;
 	}

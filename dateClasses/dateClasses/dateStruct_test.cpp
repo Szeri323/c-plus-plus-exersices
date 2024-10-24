@@ -5,8 +5,7 @@
 
 void today_test(int y, int m, int d) {
 	// Creates Date object and checks if fields are correct
-	Date today;
-	init_day(today, y, m, d);
+	Date today(y, m, d);
 	if (today.y == y && today.m == m && today.d == d) {
 		return;
 	}
@@ -14,10 +13,9 @@ void today_test(int y, int m, int d) {
 }
 
 void tomorrow_test(int y, int m, int d) {
-	Date today;
-	init_day(today, y, m, d);
+	Date today(y, m, d);
 	Date tomorrow = today;
-	add_day(tomorrow, 1);
+	tomorrow.add_day(1);
 	// test for the last day of the year
 	if (d == today.max_d && m == 12) {
 		if (tomorrow.y == y + 1 && tomorrow.m == 1 && tomorrow.d == 1) {

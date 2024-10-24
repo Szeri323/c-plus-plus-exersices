@@ -22,34 +22,35 @@ int set_max_days_for_month(int m, bool leapyear) {
 	}
 }
 
-void init_day(Date& dd, int y, int m, int d) {
+Date::Date(int yy, int mm, int dd) {
 	// checks if date contains correct year, month and day
-	dd.leapyear = is_leapyear(y, m, d);
-	dd.max_d = set_max_days_for_month(m, dd.leapyear);
+	leapyear = is_leapyear(yy, mm, dd);
+	max_d = set_max_days_for_month(mm, leapyear);
 	
-	if (y >= 0 && m >= 1 && m <= 12 && d >= 1 && d <= dd.max_d) {
-		dd.y = y;
-		dd.m = m;
-		dd.d = d;
+	if (yy >= 0 && mm >= 1 && mm <= 12 && dd >= 1 && dd <= max_d) {
+		y = yy;
+		m = mm;
+		d = dd;
 	}
 }
 
-void add_day(Date& dd, int n) {
+void Date::add_day(int n) {
 	// make different days max for different months
-	if (dd.d < dd.max_d) {
-		++dd.d;
+	if (d < max_d) {
+		++d;
 	}
 	else {
-		if (dd.m < 12) {
-			dd.d = 1;
-			++dd.m;
+		if (m < 12) {
+			d = 1;
+			++m;
 		}
 		else {
-			dd.d = 1;
-			dd.m = 1;
-			++dd.y;
+			d = 1;
+			m = 1;
+			++y;
 		}
-		init_day(dd, dd.y, dd.m, dd.d);
+		leapyear = is_leapyear(y, m, d);
+		max_d = set_max_days_for_month(m, leapyear);
 	}
 }
 

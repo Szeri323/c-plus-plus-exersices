@@ -9,7 +9,7 @@ struct Date {
 	int d;      // day
 	bool leapyear; 
 	int max_d; // max number of days in month
+	Date(int y, int m, int d);
+	void add_day(int n);
 };
-void init_day(Date& dd, int y, int m, int d);
-void add_day(Date& dd, int n);
 ostream& operator<<(ostream& os, const Date& dd);
