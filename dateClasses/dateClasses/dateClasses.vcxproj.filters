@@ -24,10 +24,10 @@
     <ClCompile Include="dateStruct_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dateClass.cpp">
+    <ClCompile Include="dateClass\dateClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dateClass_test.cpp">
+    <ClCompile Include="dateClass\dateClass_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,10 +38,10 @@
     <ClInclude Include="dateStruct_test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dateClass.h">
+    <ClInclude Include="dateClass\dateClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dateClass_test.h">
+    <ClInclude Include="dateClass\dateClass_test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

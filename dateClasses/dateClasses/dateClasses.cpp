@@ -11,13 +11,14 @@
 //test for class leapyear, months only from 1-12 and days from 1-31
 //invalid sample of test data (2004,13,-5)
 
+
 int main() {
 	try
 	{
 		tests();
 		cout << "All good." << endl;
-		Date today(2017, 01, 31);
-		Date tomorrow = today;
+		dateCalass::Date today(2017, 01, 31);
+		dateCalass::Date tomorrow = today;
 		tomorrow.add_day(1);
 		cout << today << endl;
 		cout << tomorrow << endl;

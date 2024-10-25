@@ -1,12 +1,13 @@
 #include "./dateClass.h"
-#include "../../../headers/std_lib_facilities.h"
+#include "../../../../headers/std_lib_facilities.h"
 
 // unit tests
+using namespace dateCalass;
 
 void today_test(int y, int m, int d) {
 	// Creates Date object and checks if fields are correct
 	Date today(y, m, d);
-	if (today.y == y && today.m == m && today.d == d) {
+	if (today.year() == y && today.month() == m && today.day() == d) {
 		return;
 	}
 	error("Invalid today date object or fileds.");
@@ -17,19 +18,19 @@ void tomorrow_test(int y, int m, int d) {
 	Date tomorrow = today;
 	tomorrow.add_day(1);
 	// test for the last day of the year
-	if (d == today.max_d && m == 12) {
-		if (tomorrow.y == y + 1 && tomorrow.m == 1 && tomorrow.d == 1) {
+	if (d == today.max_days() && m == 12) {
+		if (tomorrow.year() == y + 1 && tomorrow.month() == 1 && tomorrow.day() == 1) {
 			return;
 		}
 	}
 	// test for the last day of the month
-	if (d == today.max_d) {
-		if (tomorrow.y == y && tomorrow.m == m + 1 && tomorrow.d == 1) {
+	if (d == today.max_days()) {
+		if (tomorrow.year() == y && tomorrow.month() == m + 1 && tomorrow.day() == 1) {
 			return;
 		}
 	}
 	// test for normal day
-	if (tomorrow.y == y && tomorrow.m == m && tomorrow.d == d + 1) {
+	if (tomorrow.year() == y && tomorrow.month() == m && tomorrow.day() == d + 1) {
 		return;
 	}
 	error("Invalid tomorrow date object or fileds.");

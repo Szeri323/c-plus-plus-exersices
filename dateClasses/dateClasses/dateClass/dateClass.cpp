@@ -1,5 +1,7 @@
-#include "./dateClass/dateClass.h"
-#include "../../../headers/std_lib_facilities.h"
+#include "./dateClass.h"
+#include "../../../../headers/std_lib_facilities.h"
+
+using namespace dateCalass;
 
 bool is_leapyear(int y, int m, int d) {
 	if (y % 4 == 0 && y % 100 != 0 && y % 400 != 0 || y % 4 == 0 && y % 100 == 0 && y % 400 == 0) {
@@ -24,8 +26,8 @@ int set_max_days_for_month(int m, bool leapyear) {
 
 Date::Date(int yy, int mm, int dd) {
 	// checks if date contains correct year, month and day
-	leapyear = is_leapyear(yy, mm, dd);
-	max_d = set_max_days_for_month(mm, leapyear);
+	ly = is_leapyear(yy, mm, dd);
+	max_d = set_max_days_for_month(mm, ly);
 
 	if (yy >= 0 && mm >= 1 && mm <= 12 && dd >= 1 && dd <= max_d) {
 		y = yy;
@@ -49,12 +51,12 @@ void Date::add_day(int n) {
 			m = 1;
 			++y;
 		}
-		leapyear = is_leapyear(y, m, d);
-		max_d = set_max_days_for_month(m, leapyear);
+		ly = is_leapyear(y, m, d);
+		max_d = set_max_days_for_month(m, ly);
 	}
 }
 
-ostream& operator<<(ostream& os, const Date& dd) {
-	os << "Year: " << dd.y << " Month: " << dd.m << " Day: " << dd.d << " Max days of month: " << dd.max_d << " Is Leapyear: " << dd.leapyear << endl;
+ostream& operator<<(ostream& os, Date& dd) {
+	os << "Year: " << dd.year() << " Month: " << dd.month() << " Day: " << dd.day() << " Max days of month: " << dd.max_days() << " Is Leapyear: " << dd.leapyear() << endl;
 	return os;
 }
