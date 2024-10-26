@@ -1,2 +1,4 @@
 #pragma once
-void tests();
+namespace dateClass {
+	void tests();
+}

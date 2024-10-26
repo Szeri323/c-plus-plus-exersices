@@ -18,30 +18,30 @@
     <ClCompile Include="dateClasses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dateStruct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dateStruct_test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dateClass\dateClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dateClass\dateClass_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dateStruct\dateStruct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dateStruct\dateStruct_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dateStruct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dateStruct_test.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dateClass\dateClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dateClass\dateClass_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dateStruct\dateStruct_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dateStruct\dateStruct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

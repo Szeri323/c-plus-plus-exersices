@@ -15,10 +15,10 @@
 int main() {
 	try
 	{
-		tests();
+		dateClass::tests();
 		cout << "All good." << endl;
-		dateCalass::Date today(2017, 01, 31);
-		dateCalass::Date tomorrow = today;
+		dateClass::Date today(2017, 01, 31);
+		dateClass::Date tomorrow = today;
 		tomorrow.add_day(1);
 		cout << today << endl;
 		cout << tomorrow << endl;
