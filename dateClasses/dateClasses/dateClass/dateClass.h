@@ -1,10 +1,12 @@
 #pragma once
 #include "../../../../headers/std_lib_facilities.h"
 
-// cons - It allwos to use object before initialization - solved
-// cons - leave filed of the struct public
 namespace dateClass {
 	
+	enum class Month {
+		jan=1, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec
+	};
+
 	class Date {
 	public:
 		Date(int y, int m, int d);
