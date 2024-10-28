@@ -1,4 +1,4 @@
-#pragma once
-namespace dateClass {
-	void tests();
-}
+//#pragma once
+//namespace dateClass {
+//	void tests();
+//}
