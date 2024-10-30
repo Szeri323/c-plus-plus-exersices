@@ -24,7 +24,7 @@ namespace dateClass {
 		else {
 			if (int(m) < 12) {
 				d = 1;
-				static_cast<Month>(static_cast<int>(m) + 1);
+				m = static_cast<Month>(static_cast<int>(m) + 1);
 			}
 			else {
 				d = 1;

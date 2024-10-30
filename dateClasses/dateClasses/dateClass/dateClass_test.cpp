@@ -41,14 +41,14 @@ namespace dateClass {
 		// correct dates
 		vector<int> y{ 1978, 1979, 1900, 2000, 2016, 2300, 2400 };
 		//vector<int> m{ 2,3,2,2,9,2,2 };
-		vector<Month> m{ Month::feb,Month::mar,Month::feb,Month::feb,Month::sep,Month::feb,Month::feb};
+		vector<Month> m{ Month::feb, Month::mar, Month::feb, Month::feb, Month::sep, Month::feb, Month::feb};
 		vector<int> d{ 28,5,28,29,24,17,29 };
 
 		// incorrect dates
 		vector<int> iy{ 1978, 1979, 1900, 2000, 2016, 2300, 2400 };
 		//vector<int> im{ 2,35,2,5,33,2,12 };
-		vector<int> im{ 2,35,2,5,33,2,12 };
-		vector<int> id{ 29,77,29,759,24,29,32 };
+		vector<Month> im{ Month::feb, Month::mar, Month::feb, Month::may, Month::mar, Month::feb, Month::dec }; // Month enum enforced a valid month, otherwise it will not compile
+		vector<int> id{ 29,77,29,759,243,29,32 };
 
 		cout << "Today correct dates tests:" << endl;
 		for (int i = 0; i < y.size(); ++i) {
