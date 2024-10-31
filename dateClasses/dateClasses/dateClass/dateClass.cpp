@@ -17,23 +17,42 @@ namespace dateClass {
 	}
 
 	void Date::add_day(int n) {
-		// make different days max for different months
-		if (d < max_d) {
-			++d;
+		// TODO - make logic for many month eg. 62 days how many months???
+		if (int(m) < 12 && d + n < max_d) {
+			d+=n;
+		}
+		else if (int(m) < 12 && d + n > max_d) {
+				d = (d+n) % max_d;
+				m = static_cast<Month>(static_cast<int>(m) + 1);
 		}
 		else {
-			if (int(m) < 12) {
-				d = 1;
-				m = static_cast<Month>(static_cast<int>(m) + 1);
-			}
-			else {
-				d = 1;
-				m = Month::jan;
-				++y;
-			}
-			ly = is_leapyear(y);
-			max_d = set_max_days_for_month(m, ly);
+			d = (d + n) % max_d;
+			m = Month::jan;
+			++y;
 		}
+		ly = is_leapyear(y);
+		max_d = set_max_days_for_month(m, ly);
+	}
+
+	void Date::add_month(int n) {
+		// TODO - what if jan has 31 but feb only 28 or 29?
+		// TODO - add one month and does not change days or month + 1 and days from 1?
+		if (int(m) < 12) {
+			m = static_cast<Month>(static_cast<int>(m) + n);
+		}
+		else {
+			m = Month::jan;
+			++y;
+		}
+		ly = is_leapyear(y);
+		max_d = set_max_days_for_month(m, ly);
+	}
+
+	void Date::add_year(int n) {
+		// TODO - what if leapyear?
+		y += n;
+		ly = is_leapyear(y);
+		max_d = set_max_days_for_month(m, ly);
 	}
 
 	bool is_leapyear(int y) {

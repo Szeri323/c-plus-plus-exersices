@@ -36,13 +36,46 @@ namespace dateClass {
 		error("Invalid tomorrow date object or fileds.");
 	}
 
+	void next_month_test(int y, Month m, int d) {
+		Date today(y, m, d);
+		Date next_month = today;
+		next_month.add_month(1);
+		if (d == today.max_days()) {
+			if (next_month.month() == static_cast<Month>(static_cast<int>(m) + 1) && next_month.day() == next_month.max_days()) {
+				return;
+			}
+		}
+		if (m == Month::dec) {
+			if (next_month.year() == y + 1 && next_month.month() == Month::jan && next_month.day() == d) {
+				return;
+			}
+		}
+		if (next_month.year() == y && next_month.month() == static_cast<Month>(static_cast<int>(m) + 1) && next_month.day() == d) {
+			return;
+		}
+		error("Invalid tomorrow date object or fileds.");
+	}
+
+	void next_year_test(int y, Month m, int d) {
+		Date today(y, m, d);
+		Date next_year = today;
+		next_year.add_year(1);
+		if (next_year.year() == ++y) {
+			return;
+		}
+		error("Invalid tomorrow date object or fileds.");
+	}
+
 	void tests() {
 
+		// TODO - add date generator and all date cases for tests
+
+
 		// correct dates
-		vector<int> y{ 1978, 1979, 1900, 2000, 2016, 2300, 2400 };
+		vector<int> y{ 1978, 1979, 1900, 2000, 2016, 2300, 2400 , 2013 };
 		//vector<int> m{ 2,3,2,2,9,2,2 };
-		vector<Month> m{ Month::feb, Month::mar, Month::feb, Month::feb, Month::sep, Month::feb, Month::feb};
-		vector<int> d{ 28,5,28,29,24,17,29 };
+		vector<Month> m{ Month::feb, Month::mar, Month::feb, Month::feb, Month::sep, Month::feb, Month::feb, Month::dec};
+		vector<int> d{ 28,5,28,29,24,17,29, 31 };
 
 		// incorrect dates
 		vector<int> iy{ 1978, 1979, 1900, 2000, 2016, 2300, 2400 };
@@ -92,6 +125,56 @@ namespace dateClass {
 		for (int i = 0; i < iy.size(); ++i) {
 			try {
 				tomorrow_test(iy[i], im[i], id[i]);
+				cout << "Test " << i + 1 << " did not passed." << endl;
+			}
+			catch (exception& e) {
+				cout << "Test " << i + 1 << " passed." << endl;
+				cout << e.what() << endl;
+			}
+		}
+		
+		cout << "Next month correct dates tests:" << endl;
+		for (int i = 0; i < y.size(); ++i) {
+			try {
+				next_month_test(y[i], m[i], d[i]);
+				cout << "Test " << i + 1 << " passed." << endl;
+			}
+			catch (exception& e) {
+				cout << "Test " << i + 1 << " did not passed." << endl;
+				cout << e.what() << endl;
+			}
+		}
+
+		// waits for an exception because of incorrect dates and then passes the test
+		cout << "Next month incorrect dates tests:" << endl;
+		for (int i = 0; i < iy.size(); ++i) {
+			try {
+				next_month_test(iy[i], im[i], id[i]);
+				cout << "Test " << i + 1 << " did not passed." << endl;
+			}
+			catch (exception& e) {
+				cout << "Test " << i + 1 << " passed." << endl;
+				cout << e.what() << endl;
+			}
+		}
+		
+		cout << "Next year correct dates tests:" << endl;
+		for (int i = 0; i < y.size(); ++i) {
+			try {
+				next_year_test(y[i], m[i], d[i]);
+				cout << "Test " << i + 1 << " passed." << endl;
+			}
+			catch (exception& e) {
+				cout << "Test " << i + 1 << " did not passed." << endl;
+				cout << e.what() << endl;
+			}
+		}
+
+		// waits for an exception because of incorrect dates and then passes the test
+		cout << "Next year incorrect dates tests:" << endl;
+		for (int i = 0; i < iy.size(); ++i) {
+			try {
+				next_year_test(iy[i], im[i], id[i]);
 				cout << "Test " << i + 1 << " did not passed." << endl;
 			}
 			catch (exception& e) {

@@ -22,6 +22,17 @@ int main() {
 		tomorrow.add_day(1);
 		cout << today << endl;
 		cout << tomorrow << endl;
+		dateClass::Date today2(2013, dateClass::Month::dec, 31);
+		dateClass::Date next_month = today2;
+		next_month.add_month(1);
+		cout << today2 << endl;
+		cout << next_month << endl;
+		dateClass::Date today3(2017, dateClass::Month::jan, 31);
+		dateClass::Date next_year = today3;
+		next_year.add_year(1);
+		cout << today3 << endl;
+		cout << next_year << endl;
+
 	}
 	catch (const exception& e)
 	{

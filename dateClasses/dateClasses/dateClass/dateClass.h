@@ -11,13 +11,15 @@ namespace dateClass {
 	public:
 		Date(int y, Month m, int d);
 
-		int const year() { return y; };
-		Month const month() { return m; };
-		int const day() { return d; };
-		int const max_days() { return max_d; };
-		bool const leapyear() { return ly; };
+		const int year() { return y; };
+		const Month month() { return m; };
+		const int day() { return d; };
+		const int max_days() { return max_d; };
+		const bool leapyear() { return ly; };
 
 		void add_day(int n);
+		void add_month(int n);
+		void add_year(int n);
 
 		// operator overloading <<
 		friend ostream& operator<<(ostream& os, Date& dd);
@@ -33,7 +35,5 @@ namespace dateClass {
 	// helper functions
 	bool is_leapyear(int y);
 	int set_max_days_for_month(Month m, bool leapyear);
-
-	
 
 }
