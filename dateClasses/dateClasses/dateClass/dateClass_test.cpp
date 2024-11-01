@@ -76,6 +76,12 @@ namespace dateClass {
 		//vector<int> m{ 2,3,2,2,9,2,2 };
 		vector<Month> m{ Month::feb, Month::mar, Month::feb, Month::feb, Month::sep, Month::feb, Month::feb, Month::dec};
 		vector<int> d{ 28,5,28,29,24,17,29, 31 };
+		
+		// TODO - Date generator for tests
+		vector<int> y{ 1978, 1979, 1900, 2000, 2016, 2300, 2400 , 2013 };
+		//vector<int> m{ 2,3,2,2,9,2,2 };
+		vector<Month> m{ Month::jan, Month::feb, Month::mar, Month::apr, Month::may, Month::jun, Month::jul, Month::aug, Month::sep, Month::oct, Month::nov, Month::dec};
+		vector<int> d{ 28,5,28,29,24,17,29, 31 };
 
 		// incorrect dates
 		vector<int> iy{ 1978, 1979, 1900, 2000, 2016, 2300, 2400 };
