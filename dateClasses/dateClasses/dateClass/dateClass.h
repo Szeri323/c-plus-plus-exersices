@@ -17,9 +17,13 @@ namespace dateClass {
 		const int max_days() { return max_d; };
 		const bool leapyear() { return ly; };
 
-		void add_day(int n);
-		void add_month(int n);
-		void add_year(int n);
+		void add_day();
+		void add_month();
+		void add_year();
+		
+		void add_n_days(int n);
+		void add_n_months(int n);
+		void add_n_years(int n);
 
 		// operator overloading <<
 		friend ostream& operator<<(ostream& os, Date& dd);
@@ -34,6 +38,6 @@ namespace dateClass {
 
 	// helper functions
 	bool is_leapyear(int y);
-	int set_max_days_for_month(Month m, bool leapyear);
+	int calc_max_days_for_month(Month m, bool leapyear);
 
 }

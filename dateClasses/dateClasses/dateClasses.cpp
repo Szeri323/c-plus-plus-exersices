@@ -17,21 +17,40 @@ int main() {
 	{
 		dateClass::tests();
 		cout << "All good." << endl;
-		dateClass::Date today(2017, dateClass::Month::jan, 31);
+		cout << endl;
+
+
+		/*dateClass::Date today(2024, dateClass::Month::jan, 1);
 		dateClass::Date tomorrow = today;
-		tomorrow.add_day(1);
-		cout << today << endl;
-		cout << tomorrow << endl;
-		dateClass::Date today2(2013, dateClass::Month::dec, 31);
+
+		for (int i = 1; i <= 366; ++i) {
+			cout << "Next day." << endl;
+			tomorrow.add_day();
+			cout << today << endl;
+			cout << tomorrow << endl;
+		}*/
+
+
+		/*dateClass::Date today2(2013, dateClass::Month::dec, 31);
 		dateClass::Date next_month = today2;
-		next_month.add_month(1);
-		cout << today2 << endl;
-		cout << next_month << endl;
-		dateClass::Date today3(2017, dateClass::Month::jan, 31);
+
+		for (int i = 1; i <= 13; ++i) {
+			cout << "Next month." << endl;
+			next_month.add_month();
+			cout << today2 << endl;
+			cout << next_month << endl;
+		}*/
+
+
+		/*dateClass::Date today3(2017, dateClass::Month::jan, 31);
 		dateClass::Date next_year = today3;
-		next_year.add_year(1);
-		cout << today3 << endl;
-		cout << next_year << endl;
+
+		for (int i = 1; i <= 12; ++i) {
+			cout << "Next year." << endl;
+			next_year.add_year();
+			cout << today3 << endl;
+			cout << next_year << endl;
+		}*/
 
 	}
 	catch (const exception& e)

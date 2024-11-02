@@ -6,7 +6,7 @@ namespace dateClass {
 	Date::Date(int yy, Month mm, int dd) : y(yy), m(mm), d(dd) {
 		// checks if date contains correct year, month and day
 		ly = is_leapyear(yy);
-		max_d = set_max_days_for_month(mm, ly);
+		max_d = calc_max_days_for_month(mm, ly);
 
 		if (!(yy >= 0 && int(mm) >= 1 && int(mm) <= 12 && dd >= 1 && dd <= max_d)) {
 			/*y = yy;
@@ -16,14 +16,64 @@ namespace dateClass {
 		}
 	}
 
-	void Date::add_day(int n) {
+	void Date::add_day() {
 		// TODO - make logic for many month eg. 62 days how many months???
-		if (int(m) < 12 && d + n < max_d) {
-			d+=n;
+		if (m == Month::dec && d == max_d) {
+			d = 1;
+			m = Month::jan;
+			++y;
+		}
+		else if (m != Month::dec && d == max_d) {
+			d = 1;
+			m = static_cast<Month>(static_cast<int>(m) + 1);
+		}
+		else {
+			++d;
+		}
+		ly = is_leapyear(y);
+		max_d = calc_max_days_for_month(m, ly);
+	}
+
+	void Date::add_month() {
+		// TODO - what if jan has 31 but feb only 28 or 29?
+		// TODO - add one month and does not change days or month + 1 and days from 1?
+		int next_month_max_d;
+		if (int(m) == 12) {
+		next_month_max_d = calc_max_days_for_month(Month::jan, is_leapyear(y+1));
+		}
+		else{
+		next_month_max_d = calc_max_days_for_month(static_cast<Month>(static_cast<int>(m) + 1), ly);
+		}
+		if (int(m) < 12 && d <= next_month_max_d) {
+			m = static_cast<Month>(static_cast<int>(m) + 1);
+		}
+		else if (int(m) < 12 && d > next_month_max_d) {
+			d = d % next_month_max_d;
+			m = static_cast<Month>(static_cast<int>(m) + 2);
+		}
+		else {
+			m = Month::jan;
+			++y;
+		}
+
+		ly = is_leapyear(y);
+		max_d = calc_max_days_for_month(m, ly);
+	}
+
+	void Date::add_year() {
+		++y;
+		ly = is_leapyear(y);
+		max_d = calc_max_days_for_month(m, ly);
+	}
+
+	void Date::add_n_days(int n) {
+		// TODO - make logic for many month eg. 62 days how many months???
+		if (int(m) <= 12 && d + n <= max_d) {
+			d += n;
 		}
 		else if (int(m) < 12 && d + n > max_d) {
-				d = (d+n) % max_d;
-				m = static_cast<Month>(static_cast<int>(m) + 1);
+			d = (d + n) % max_d;
+			m = static_cast<Month>(static_cast<int>(m) + 1);
 		}
 		else {
 			d = (d + n) % max_d;
@@ -31,28 +81,42 @@ namespace dateClass {
 			++y;
 		}
 		ly = is_leapyear(y);
-		max_d = set_max_days_for_month(m, ly);
+		max_d = calc_max_days_for_month(m, ly);
 	}
-
-	void Date::add_month(int n) {
+	void Date::add_n_months(int n) {
 		// TODO - what if jan has 31 but feb only 28 or 29?
 		// TODO - add one month and does not change days or month + 1 and days from 1?
-		if (int(m) < 12) {
-			m = static_cast<Month>(static_cast<int>(m) + n);
+		int next_month_max_d;
+		if (int(m) + n > 12) {
+			next_month_max_d = calc_max_days_for_month(static_cast<Month>((static_cast<int>(m) + n) % 12), ly);
 		}
 		else {
+			next_month_max_d = calc_max_days_for_month(static_cast<Month>(static_cast<int>(m) + n), ly);
+		}
+		cout << next_month_max_d << endl;
+		if (int(m) < 12 && d <= next_month_max_d) {
+			m = static_cast<Month>(static_cast<int>(m) + n);
+		}
+		else if (int(m) < 12 && d > next_month_max_d) {
+			d = next_month_max_d;
+			m = static_cast<Month>(static_cast<int>(m) + n);
+		}
+		else if (int(m) == 12 && d <= next_month_max_d) {
+			m = Month::jan;
+			++y;
+		}
+		else {
+			d = next_month_max_d;
 			m = Month::jan;
 			++y;
 		}
 		ly = is_leapyear(y);
-		max_d = set_max_days_for_month(m, ly);
+		max_d = calc_max_days_for_month(m, ly);
 	}
-
-	void Date::add_year(int n) {
-		// TODO - what if leapyear?
+	void Date::add_n_years(int n) {
 		y += n;
 		ly = is_leapyear(y);
-		max_d = set_max_days_for_month(m, ly);
+		max_d = calc_max_days_for_month(m, ly);
 	}
 
 	bool is_leapyear(int y) {
@@ -62,7 +126,7 @@ namespace dateClass {
 		return false;
 	}
 
-	int set_max_days_for_month(Month m, bool leapyear) {
+	int calc_max_days_for_month(Month m, bool leapyear) {
 		switch (int(m)) {
 		case 1:case 3:case 5:case 7:case 8:case 10:case 12:
 			return 31;
