@@ -4,6 +4,8 @@
 // unit tests
 namespace dateClass {
 
+	// TODO - write better tests
+
 	void today_test(int y, Month m, int d) {
 		// Creates Date object and checks if fields are correct
 		Date today(y, m, d);
@@ -17,6 +19,8 @@ namespace dateClass {
 		Date today(y, m, d);
 		Date tomorrow = today;
 		tomorrow.add_day();
+		cout << today << endl;
+		cout << tomorrow << endl;
 		// test for the last day of the year
 		if (d == today.max_days() && m == Month::dec) {
 			if (tomorrow.year() == y + 1 && tomorrow.month() == Month::jan && tomorrow.day() == 1) {
@@ -40,6 +44,8 @@ namespace dateClass {
 		Date today(y, m, d);
 		Date next_month = today;
 		next_month.add_month();
+		cout << today << endl;
+		cout << next_month << endl;
 		// test for last month but not last day
 		if (m == Month::dec && !(d == today.max_days())) {
 			if (next_month.year() == y + 1 && next_month.month() == Month::jan && next_month.day() == d) {
@@ -53,7 +59,7 @@ namespace dateClass {
 			}
 		}
 		// test for last day of month but not last month of the year
-		if (d == today.max_days() && !(m == Month::dec)) {
+		if (!(m == Month::dec) && d == today.max_days()) {
 			if (next_month.month() == static_cast<Month>(static_cast<int>(m) + 1) && next_month.day() == next_month.max_days()) {
 				return;
 			}
@@ -69,7 +75,9 @@ namespace dateClass {
 		Date today(y, m, d);
 		Date next_year = today;
 		next_year.add_year();
-		if (next_year.year() == ++y) {
+		cout << today << endl;
+		cout << next_year << endl;
+		if (next_year.year() == y+1) {
 			return;
 		}
 		error("Invalid tomorrow date object or fileds.");

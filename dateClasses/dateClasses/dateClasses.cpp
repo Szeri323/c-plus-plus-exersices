@@ -52,6 +52,9 @@ int main() {
 			cout << next_year << endl;
 		}*/
 
+		const dateClass::Date d(2001, dateClass::Month::feb, 21);
+		d.day();
+
 	}
 	catch (const exception& e)
 	{

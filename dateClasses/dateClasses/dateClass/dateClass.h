@@ -9,18 +9,20 @@ namespace dateClass {
 
 	class Date {
 	public:
+		// constructor
 		Date(int y, Month m, int d);
 
-		const int year() { return y; };
-		const Month month() { return m; };
-		const int day() { return d; };
-		const int max_days() { return max_d; };
-		const bool leapyear() { return ly; };
+		// unmatable methods
+		int year() const { return y; };
+		Month month() const { return m; };
+		int day() const { return d; };
+		int max_days() const { return max_d; };
+		bool leapyear() const { return ly; };
 
+		// mutable methods
 		void add_day();
 		void add_month();
 		void add_year();
-		
 		void add_n_days(int n);
 		void add_n_months(int n);
 		void add_n_years(int n);

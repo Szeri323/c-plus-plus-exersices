@@ -3,6 +3,9 @@
 
 namespace dateClass {
 
+	// TODO - where it is possible use methods: eg is possible to use add_year insteed of ++y 
+	// TODO - write logic for add_n_xxxx 
+
 	Date::Date(int yy, Month mm, int dd) : y(yy), m(mm), d(dd) {
 		// checks if date contains correct year, month and day
 		ly = is_leapyear(yy);
@@ -35,8 +38,7 @@ namespace dateClass {
 	}
 
 	void Date::add_month() {
-		// TODO - what if jan has 31 but feb only 28 or 29?
-		// TODO - add one month and does not change days or month + 1 and days from 1?
+		// add month, if it is last month of the year add year, if days is greater than max days of next month adds another month and set days to rest of modulo
 		int next_month_max_d;
 		if (int(m) == 12) {
 		next_month_max_d = calc_max_days_for_month(Month::jan, is_leapyear(y+1));
@@ -61,9 +63,13 @@ namespace dateClass {
 	}
 
 	void Date::add_year() {
+		// change year and if days are greater than max days of month set d to max_d
 		++y;
 		ly = is_leapyear(y);
 		max_d = calc_max_days_for_month(m, ly);
+		if (d > max_d) {
+			d = max_d;
+		}
 	}
 
 	void Date::add_n_days(int n) {
