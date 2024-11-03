@@ -150,5 +150,27 @@ int main() {
 	cout << "local range - \n";
 	cout << "namespace range - \n";
 
+	cout << "\n\n--- Chapter 9 - Technical details - classes etc. ---\n\n";
+
+	cout << "class - .\n";
+	cout << "const - .\n";
+	cout << "destructor - .\n";
+	cout << "enum - .\n";
+	cout << "enumeration - .\n";
+	cout << "enumeration element - .\n";
+	cout << "helper function - .\n";
+	cout << "implementation - .\n";
+	cout << "class initializator - .\n";
+	cout << "interface - .\n";
+	cout << "contructor - .\n";
+	cout << "invaritant - .\n";
+	cout << "correct state - .\n";
+	cout << "representation - .\n";
+	cout << "struct - .\n";
+	cout << "structure - .\n";
+	cout << "build-in types - .\n";
+	cout << "user defined types - .\n";
+	cout << "inlining - .\n";
+
 	return 0;
 }
