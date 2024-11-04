@@ -153,13 +153,13 @@ int main() {
 	cout << "\n\n--- Chapter 9 - Technical details - classes etc. ---\n\n";
 
 	cout << "class - .\n";
-	cout << "const - .\n";
-	cout << "destructor - .\n";
-	cout << "enum - .\n";
+	cout << "const - an immutable variable or variable that can't be changed after a compilation.\n";
+	cout << "destructor - use '~' sign and is used for destory an unused objects.\n";
+	cout << "enum - shorthand of enumeration.\n";
 	cout << "enumeration - .\n";
 	cout << "enumeration element - .\n";
-	cout << "helper function - .\n";
-	cout << "implementation - .\n";
+	cout << "helper function - function that working on objects but are defined outside of the class definition.\n";
+	cout << "implementation - it is a hidden part of the class. It contains definitions of methods or keep access to calss fields.\n";
 	cout << "class initializator - .\n";
 	cout << "interface - .\n";
 	cout << "contructor - .\n";
