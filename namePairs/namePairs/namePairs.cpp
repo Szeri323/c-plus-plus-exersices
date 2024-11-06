@@ -6,6 +6,9 @@ public:
 	void read_ages();
 	void sort();
 	void print();
+	friend ostream& operator <<(ostream& os, const Name_pairs np);
+	friend bool operator ==(const Name_pairs np, const Name_pairs np2);
+	friend bool operator !=(const Name_pairs np, const Name_pairs np2);
 private:
 	vector<string> names;
 	vector<double> ages;
@@ -56,6 +59,20 @@ void Name_pairs::print() {
 	}
 }
 
+ostream& operator <<(ostream& os, Name_pairs np) {
+	for (int i = 0; i < np.names.size(); ++i) {
+		os << np.names[i] << " " << np.ages[i] << endl;
+	}
+	return os;
+}
+
+bool operator ==(const Name_pairs np, const Name_pairs np2) {
+
+}
+bool operator !=(const Name_pairs np, const Name_pairs np2) {
+
+}
+
 int main() {
 	Name_pairs test;
 	int number;
@@ -66,8 +83,9 @@ int main() {
 		test.read_ages();
 	}
 	cout << "Printing results:" << endl;
-	test.print();
-	test.sort();
+	//test.print();
+	cout << test << endl;
+	//test.sort();
 	cout << "Printing results:" << endl;
 	test.print();
 }
