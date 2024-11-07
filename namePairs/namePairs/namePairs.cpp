@@ -67,10 +67,14 @@ ostream& operator <<(ostream& os, Name_pairs np) {
 }
 
 bool operator ==(const Name_pairs np, const Name_pairs np2) {
-
+	if (np.names.size() == np2.names.size() && np.ages.size() == np2.ages.size())
+		return true;
+	return false;
 }
 bool operator !=(const Name_pairs np, const Name_pairs np2) {
-
+	if (np.names.size() == np2.names.size() && np.ages.size() == np2.ages.size())
+		return false;
+	return true;
 }
 
 int main() {
