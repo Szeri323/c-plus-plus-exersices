@@ -67,14 +67,18 @@ ostream& operator <<(ostream& os, Name_pairs np) {
 }
 
 bool operator ==(const Name_pairs np, const Name_pairs np2) {
-	if (np.names.size() == np2.names.size() && np.ages.size() == np2.ages.size())
+	if ((np.names.size() == np.ages.size()) && (np2.names.size() == np2.ages.size()) && (np.names.size()==np2.names.size())) {
+		for (int i = 0; i < np.names.size(); ++i) {
+			if (np.names[i] != np2.names[i] || np.ages[i] != np2.ages[i]) {
+				return false;
+			}
+		}
 		return true;
+	}
 	return false;
 }
 bool operator !=(const Name_pairs np, const Name_pairs np2) {
-	if (np.names.size() == np2.names.size() && np.ages.size() == np2.ages.size())
-		return false;
-	return true;
+	return !(np == np2);
 }
 
 int main() {
@@ -86,10 +90,17 @@ int main() {
 		test.read_names();
 		test.read_ages();
 	}
-	cout << "Printing results:" << endl;
-	//test.print();
+	Name_pairs test2;
+	cout << "Pass the number for: ";
+	cin >> number;
+	for (int i = 0; i < number; ++i) {
+		test2.read_names();
+		test2.read_ages();
+	}
+	cout << "Printing results test:" << endl;
 	cout << test << endl;
-	//test.sort();
-	cout << "Printing results:" << endl;
-	test.print();
+	cout << "Printing results test2:" << endl;
+	cout << test2 << endl;
+	cout << (test == test2) << endl;
+	cout << (test != test2) << endl;
 }
