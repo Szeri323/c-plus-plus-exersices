@@ -9,7 +9,14 @@ public:
 	std::string get_title() {return title;}
 	std::string get_author() {return author;}
 	std::string get_copyright_date() {return copyright_date;}
+	
+	//
+	bool borrow_book();
+	bool return_book();
 
+	//operators
+	bool operator ==(Book b);
+	bool operator !=(Book b);
 
 private:
 	bool is_available;
@@ -18,3 +25,5 @@ private:
 	std::string author;
 	std::string copyright_date;
 };
+
+ostream& operator <<(ostream& os, Book b);
